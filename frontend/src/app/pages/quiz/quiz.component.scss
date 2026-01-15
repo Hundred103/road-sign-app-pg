@@ -1,0 +1,171 @@
+.quiz-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.quiz-intro {
+  text-align: center;
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+
+  h1 {
+    color: #333;
+    margin-bottom: 16px;
+    font-size: 2rem;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+  }
+
+  .start-btn {
+    font-size: 1.2rem;
+    padding: 16px 48px;
+  }
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  height: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+
+  .progress {
+    background: #4CAF50;
+    height: 100%;
+    transition: width 0.3s;
+  }
+}
+
+.question-counter {
+  color: white;
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.question-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+
+  h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .question-image {
+    text-align: center;
+    margin-bottom: 24px;
+
+    img {
+      max-width: 150px;
+      max-height: 150px;
+    }
+  }
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.answer-btn {
+  padding: 16px 24px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    border-color: #2196F3;
+    background: #E3F2FD;
+  }
+
+  &.selected {
+    border-color: #2196F3;
+    background: #E3F2FD;
+  }
+
+  &.correct {
+    border-color: #4CAF50;
+    background: #E8F5E9;
+  }
+
+  &.incorrect {
+    border-color: #f44336;
+    background: #FFEBEE;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.result-feedback {
+  margin-top: 24px;
+  text-align: center;
+
+  .correct-feedback,
+  .incorrect-feedback {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .correct-feedback {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+
+  .incorrect-feedback {
+    background: #FFEBEE;
+    color: #C62828;
+  }
+}
+
+.quiz-result {
+  .result-card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    text-align: center;
+
+    h1 {
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .score-display {
+      margin-bottom: 16px;
+
+      .score {
+        font-size: 4rem;
+        font-weight: 700;
+        color: #4CAF50;
+      }
+
+      .max-score {
+        font-size: 2rem;
+        color: #999;
+      }
+    }
+
+    .score-message {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 32px;
+    }
+  }
+}

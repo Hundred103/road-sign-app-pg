@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: sign-service
+          uri: ${SIGN_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/signs/**
+          filters:
+            - StripPrefix=1
+
+        - id: user-service
+          uri: ${USER_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+
+        - id: quiz-service
+          uri: ${SIGN_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/quiz/**
+          filters:
+            - StripPrefix=1
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, gateway
+  endpoint:
+    gateway:
+      enabled: true

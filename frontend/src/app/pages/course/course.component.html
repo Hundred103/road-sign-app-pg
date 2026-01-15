@@ -1,0 +1,38 @@
+<div class="course-container">
+  <h1 class="page-title">Poznaj znaki drogowe</h1>
+  
+  <div class="category-tabs">
+    <button 
+      *ngFor="let cat of categories" 
+      class="tab-btn"
+      [class.active]="selectedCategory === cat.value"
+      (click)="selectCategory(cat.value)">
+      {{ cat.label }}
+    </button>
+  </div>
+  
+  <div class="signs-grid">
+    <div *ngFor="let sign of filteredSigns" class="sign-card" (click)="selectSign(sign)">
+      <div class="sign-image">
+        <img [src]="sign.imageUrl || '/assets/signs/placeholder.png'" [alt]="sign.name">
+      </div>
+      <h3>{{ sign.code }}</h3>
+      <p>{{ sign.name }}</p>
+    </div>
+  </div>
+  
+  <div *ngIf="selectedSign" class="sign-detail-overlay" (click)="closeDetail()">
+    <div class="sign-detail-card" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeDetail()">&times;</button>
+      <div class="detail-image">
+        <img [src]="selectedSign.imageUrl || '/assets/signs/placeholder.png'" [alt]="selectedSign.name">
+      </div>
+      <h2>{{ selectedSign.code }} - {{ selectedSign.name }}</h2>
+      <p class="description">{{ selectedSign.description }}</p>
+      <div class="kid-friendly">
+        <span class="label">Dla Ciebie:</span>
+        <p>{{ selectedSign.kidFriendlyDescription }}</p>
+      </div>
+    </div>
+  </div>
+</div>

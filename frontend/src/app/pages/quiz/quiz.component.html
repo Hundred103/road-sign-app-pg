@@ -1,0 +1,63 @@
+<div class="quiz-container">
+  <div *ngIf="!quizStarted && !quizFinished" class="quiz-intro">
+    <h1>Quiz o znakach drogowych</h1>
+    <p>Sprawdz swoja wiedze! Odpowiedz na pytania i zobacz ile punktow zdobedziesz.</p>
+    <button class="btn btn-primary start-btn" (click)="startQuiz()">
+      Rozpocznij quiz
+    </button>
+  </div>
+  
+  <div *ngIf="quizStarted && !quizFinished" class="quiz-question">
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="(currentQuestionIndex + 1) / questions.length * 100"></div>
+    </div>
+    <p class="question-counter">Pytanie {{ currentQuestionIndex + 1 }} z {{ questions.length }}</p>
+    
+    <div class="question-card">
+      <h2>{{ currentQuestion.question }}</h2>
+      
+      <div *ngIf="currentQuestion.imageUrl" class="question-image">
+        <img [src]="currentQuestion.imageUrl" alt="Znak drogowy">
+      </div>
+      
+      <div class="answers">
+        <button 
+          *ngFor="let answer of currentQuestion.answers; let i = index"
+          class="answer-btn"
+          [class.selected]="selectedAnswerIndex === i"
+          [class.correct]="showResult && answer.correct"
+          [class.incorrect]="showResult && selectedAnswerIndex === i && !answer.correct"
+          [disabled]="showResult"
+          (click)="selectAnswer(i)">
+          {{ getLetterForIndex(i) }}. {{ answer.text }}
+        </button>
+      </div>
+      
+      <div *ngIf="showResult" class="result-feedback">
+        <div *ngIf="isCorrect" class="correct-feedback">
+          Brawo! Poprawna odpowiedz!
+        </div>
+        <div *ngIf="!isCorrect" class="incorrect-feedback">
+          Niestety, to nie jest poprawna odpowiedz.
+        </div>
+        <button class="btn btn-secondary" (click)="nextQuestion()">
+          {{ isLastQuestion ? 'Zobacz wynik' : 'Nastepne pytanie' }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="quizFinished" class="quiz-result">
+    <div class="result-card">
+      <h1>Quiz zakonczony!</h1>
+      <div class="score-display">
+        <span class="score">{{ score }}</span>
+        <span class="max-score">/ {{ questions.length }}</span>
+      </div>
+      <p class="score-message">{{ getScoreMessage() }}</p>
+      <div class="result-actions">
+        <button class="btn btn-primary" (click)="restartQuiz()">Sprobuj ponownie</button>
+      </div>
+    </div>
+  </div>
+</div>

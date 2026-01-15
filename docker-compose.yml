@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: road-sign-db
+    environment:
+      POSTGRES_DB: roadsignapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - road-sign-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d roadsignapp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # API Gateway
+  gateway:
+    build:
+      context: ./backend/gateway
+      dockerfile: Dockerfile
+    container_name: road-sign-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SIGN_SERVICE_URL=http://sign-service:8081
+      - USER_SERVICE_URL=http://user-service:8082
+    depends_on:
+      - sign-service
+      - user-service
+    networks:
+      - road-sign-network
+
+  # Sign Service
+  sign-service:
+    build:
+      context: ./backend/sign-service
+      dockerfile: Dockerfile
+    container_name: road-sign-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/roadsignapp
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - road-sign-network
+
+  # User Service
+  user-service:
+    build:
+      context: ./backend/user-service
+      dockerfile: Dockerfile
+    container_name: road-sign-user-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/roadsignapp
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - road-sign-network
+
+  # Angular Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: road-sign-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - gateway
+    networks:
+      - road-sign-network
+
+volumes:
+  postgres_data:
+
+networks:
+  road-sign-network:
+    driver: bridge
