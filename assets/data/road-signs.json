@@ -1,0 +1,184 @@
+{
+  "signs": [
+    {
+      "id": 1,
+      "code": "A-1",
+      "name": "Niebezpieczny zakret w prawo",
+      "description": "Ostrzega o niebezpiecznym zakrecie w prawo",
+      "category": "WARNING",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Uwaga! Droga skreca w prawo. Kierowca musi jechac wolniej."
+    },
+    {
+      "id": 2,
+      "code": "A-2",
+      "name": "Niebezpieczny zakret w lewo",
+      "description": "Ostrzega o niebezpiecznym zakrecie w lewo",
+      "category": "WARNING",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Uwaga! Droga skreca w lewo. Trzeba zwolnic!"
+    },
+    {
+      "id": 3,
+      "code": "A-7",
+      "name": "Ustap pierwszenstwa",
+      "description": "Nakaz ustapienia pierwszenstwa przejazdu",
+      "category": "PRIORITY",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Musisz przepuscic inne samochody, ktore jada glowna droga."
+    },
+    {
+      "id": 4,
+      "code": "A-17",
+      "name": "Dzieci",
+      "description": "Ostrzega o miejscu szczegolnie uczeszanym przez dzieci",
+      "category": "WARNING",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Uwaga! W poblizu moga byc dzieci - przy szkole lub placu zabaw."
+    },
+    {
+      "id": 5,
+      "code": "A-18a",
+      "name": "Zwierzeta gospodarskie",
+      "description": "Ostrzega o miejscu, w ktorym na drodze moga pojawic sie zwierzeta gospodarskie",
+      "category": "WARNING",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Moze tu przechodzic krowa lub inne zwierzeta z gospodarstwa!"
+    },
+    {
+      "id": 6,
+      "code": "B-1",
+      "name": "Zakaz ruchu w obu kierunkach",
+      "description": "Zakaz ruchu w obu kierunkach",
+      "category": "PROHIBITION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Stop! Tedy nie wolno jechac zadnym pojazdom."
+    },
+    {
+      "id": 7,
+      "code": "B-2",
+      "name": "Zakaz wjazdu",
+      "description": "Zakaz wjazdu pojazdow na droge",
+      "category": "PROHIBITION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Nie wolno tu wjezdzac! Znak dla kierowcow jadacych w te strone."
+    },
+    {
+      "id": 8,
+      "code": "B-20",
+      "name": "Stop",
+      "description": "Zatrzymaj sie i ustap pierwszenstwa",
+      "category": "PROHIBITION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Musisz sie calkowicie zatrzymac i przepuscic inne pojazdy!"
+    },
+    {
+      "id": 9,
+      "code": "B-33",
+      "name": "Ograniczenie predkosci",
+      "description": "Zakaz przekraczania okreslonej predkosci",
+      "category": "PROHIBITION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Nie wolno jechac szybciej niz pokazuje liczba na znaku."
+    },
+    {
+      "id": 10,
+      "code": "B-41",
+      "name": "Zakaz ruchu pieszych",
+      "description": "Zakaz ruchu pieszych na tej drodze",
+      "category": "PROHIBITION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Tedy nie wolno isc pieszo - to droga tylko dla pojazdow."
+    },
+    {
+      "id": 11,
+      "code": "C-1",
+      "name": "Nakaz jazdy w prawo przed znakiem",
+      "description": "Nakaz jazdy w prawo przed znakiem",
+      "category": "MANDATORY",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Musisz skrecic w prawo przed tym znakiem."
+    },
+    {
+      "id": 12,
+      "code": "C-2",
+      "name": "Nakaz jazdy w prawo za znakiem",
+      "description": "Nakaz jazdy w prawo za znakiem",
+      "category": "MANDATORY",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Musisz skrecic w prawo za tym znakiem."
+    },
+    {
+      "id": 13,
+      "code": "C-12",
+      "name": "Ruch okrezny",
+      "description": "Nakaz jazdy na rondzie w kierunku wskazanym strzalkami",
+      "category": "MANDATORY",
+      "imageUrl": null,
+      "kidFriendlyDescription": "To rondo - jedz dookola zgodnie ze strzalkami."
+    },
+    {
+      "id": 14,
+      "code": "C-13",
+      "name": "Droga dla rowerow",
+      "description": "Droga przeznaczona tylko dla rowerow",
+      "category": "MANDATORY",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Sciezka tylko dla rowerow - mozesz tu jezdzic na rowerze!"
+    },
+    {
+      "id": 15,
+      "code": "C-16",
+      "name": "Droga dla pieszych",
+      "description": "Droga przeznaczona tylko dla pieszych",
+      "category": "MANDATORY",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Chodnik - tylko dla osob idacych pieszo."
+    },
+    {
+      "id": 16,
+      "code": "D-1",
+      "name": "Droga z pierwszenstwem",
+      "description": "Informuje o drodze z pierwszenstwem przejazdu",
+      "category": "INFORMATION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Jedziesz glowna droga - masz pierwszenstwo!"
+    },
+    {
+      "id": 17,
+      "code": "D-6",
+      "name": "Przejscie dla pieszych",
+      "description": "Informuje o przejsciu dla pieszych",
+      "category": "INFORMATION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Tu mozesz bezpiecznie przejsc przez ulice - zebra!"
+    },
+    {
+      "id": 18,
+      "code": "D-6b",
+      "name": "Przejscie dla pieszych i przejazd dla rowerow",
+      "description": "Informuje o przejsciu dla pieszych i przejazdzie dla rowerow",
+      "category": "INFORMATION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Przejscie dla pieszych i rowerow - mozesz przejsc lub przejechac."
+    },
+    {
+      "id": 19,
+      "code": "D-18",
+      "name": "Parking",
+      "description": "Informuje o miejscu przeznaczonym do parkowania",
+      "category": "INFORMATION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Tu mozna zaparkowac samochod."
+    },
+    {
+      "id": 20,
+      "code": "D-42",
+      "name": "Obszar zabudowany",
+      "description": "Poczatek obszaru zabudowanego - ograniczenie do 50 km/h",
+      "category": "INFORMATION",
+      "imageUrl": null,
+      "kidFriendlyDescription": "Wjezdzasz do miasta lub wsi - trzeba jechac wolniej."
+    }
+  ]
+}

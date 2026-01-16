@@ -1,13 +1,18 @@
 <div class="quiz-container">
-  <div *ngIf="!quizStarted && !quizFinished" class="quiz-intro">
+  <div *ngIf="isLoading" class="loading">
+    <p>Ladowanie pytan...</p>
+  </div>
+
+  <div *ngIf="!isLoading && !quizStarted && !quizFinished" class="quiz-intro">
     <h1>Quiz o znakach drogowych</h1>
     <p>Sprawdz swoja wiedze! Odpowiedz na pytania i zobacz ile punktow zdobedziesz.</p>
-    <button class="btn btn-primary start-btn" (click)="startQuiz()">
+    <p class="question-count">Liczba pytan: {{ questions.length }}</p>
+    <button class="btn btn-primary start-btn" (click)="startQuiz()" [disabled]="questions.length === 0">
       Rozpocznij quiz
     </button>
   </div>
   
-  <div *ngIf="quizStarted && !quizFinished" class="quiz-question">
+  <div *ngIf="!isLoading && quizStarted && !quizFinished" class="quiz-question">
     <div class="progress-bar">
       <div class="progress" [style.width.%]="(currentQuestionIndex + 1) / questions.length * 100"></div>
     </div>

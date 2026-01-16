@@ -3,6 +3,15 @@
   margin: 0 auto;
 }
 
+.loading {
+  text-align: center;
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+  color: #666;
+  font-size: 1.2rem;
+}
+
 .quiz-intro {
   text-align: center;
   background: white;
@@ -17,13 +26,24 @@
 
   p {
     color: #666;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     font-size: 1.1rem;
+  }
+
+  .question-count {
+    font-weight: 600;
+    color: #4CAF50;
+    margin-bottom: 32px;
   }
 
   .start-btn {
     font-size: 1.2rem;
     padding: 16px 48px;
+
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, catchError } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 export interface RoadSign {
@@ -13,6 +14,13 @@ export interface RoadSign {
   kidFriendlyDescription: string;
 }
 
+export interface QuizQuestion {
+  id: number;
+  question: string;
+  imageUrl?: string;
+  answers: { text: string; correct: boolean }[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +29,33 @@ export class SignService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Get all road signs - tries API first, falls back to local JSON
+   */
   getAllSigns(): Observable<RoadSign[]> {
-    return this.http.get<RoadSign[]>(this.apiUrl);
+    return this.http.get<RoadSign[]>(this.apiUrl).pipe(
+      catchError(() => this.getSignsFromJson())
+    );
+  }
+
+  /**
+   * Load signs from local JSON file (assets/data/road-signs.json)
+   */
+  getSignsFromJson(): Observable<RoadSign[]> {
+    return this.http.get<{ signs: RoadSign[] }>('/assets/data/road-signs.json').pipe(
+      map(data => data.signs),
+      catchError(() => of([]))
+    );
+  }
+
+  /**
+   * Get quiz questions from local JSON file (assets/data/quiz-questions.json)
+   */
+  getQuizQuestions(): Observable<QuizQuestion[]> {
+    return this.http.get<{ questions: QuizQuestion[] }>('/assets/data/quiz-questions.json').pipe(
+      map(data => data.questions),
+      catchError(() => of([]))
+    );
   }
 
   getSignById(id: number): Observable<RoadSign> {

@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/signs")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class RoadSignController {
 
     private final RoadSignService roadSignService;

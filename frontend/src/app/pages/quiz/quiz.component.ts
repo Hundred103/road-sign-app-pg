@@ -1,12 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface QuizQuestion {
-  id: number;
-  question: string;
-  imageUrl?: string;
-  answers: { text: string; correct: boolean }[];
-}
+import { SignService, QuizQuestion } from '../../services/sign.service';
 
 @Component({
   selector: 'app-quiz',
@@ -16,6 +10,8 @@ interface QuizQuestion {
   styleUrl: './quiz.component.scss'
 })
 export class QuizComponent implements OnInit {
+  private signService = inject(SignService);
+
   questions: QuizQuestion[] = [];
   currentQuestionIndex = 0;
   selectedAnswerIndex: number | null = null;
@@ -24,6 +20,7 @@ export class QuizComponent implements OnInit {
   score = 0;
   quizStarted = false;
   quizFinished = false;
+  isLoading = true;
 
   ngOnInit() {
     this.loadQuestions();
@@ -37,59 +34,34 @@ export class QuizComponent implements OnInit {
     return this.currentQuestionIndex === this.questions.length - 1;
   }
 
+  /**
+   * Load questions from JSON file via SignService
+   * Questions are defined in: assets/data/quiz-questions.json
+   */
   loadQuestions() {
-    this.questions = [
-      {
-        id: 1,
-        question: 'Co oznacza znak B-1 (czerwone kolo z bialym srodkiem)?',
-        answers: [
-          { text: 'Zakaz ruchu w obu kierunkach', correct: true },
-          { text: 'Zakaz wjazdu', correct: false },
-          { text: 'Zakaz zatrzymywania', correct: false },
-          { text: 'Droga dla pieszych', correct: false }
-        ]
+    this.isLoading = true;
+    this.signService.getQuizQuestions().subscribe({
+      next: (questions) => {
+        this.questions = this.shuffleArray(questions);
+        this.isLoading = false;
       },
-      {
-        id: 2,
-        question: 'Trojkatny znak z czerwona obwodka i symbolem krowy oznacza:',
-        answers: [
-          { text: 'Gospodarstwo rolne w poblizu', correct: false },
-          { text: 'Zwierzeta gospodarskie moga pojawic sie na drodze', correct: true },
-          { text: 'Zakaz wjazdu dla zwierzat', correct: false },
-          { text: 'Ferma zwierzat', correct: false }
-        ]
-      },
-      {
-        id: 3,
-        question: 'Niebieski okragly znak z biala strzalka w prawo oznacza:',
-        answers: [
-          { text: 'Zalecany kierunek jazdy', correct: false },
-          { text: 'Nakaz jazdy w prawo', correct: true },
-          { text: 'Informacja o skrecie', correct: false },
-          { text: 'Parking po prawej stronie', correct: false }
-        ]
-      },
-      {
-        id: 4,
-        question: 'Znak "STOP" wymaga:',
-        answers: [
-          { text: 'Zmniejszenia predkosci', correct: false },
-          { text: 'Zatrzymania pojazdu', correct: true },
-          { text: 'Ustapienia pierwszenstwa bez zatrzymywania', correct: false },
-          { text: 'Zwiekszenia ostroznosci', correct: false }
-        ]
-      },
-      {
-        id: 5,
-        question: 'Znak z przekreslonym telefonem oznacza:',
-        answers: [
-          { text: 'Telefon awaryjny w poblizu', correct: false },
-          { text: 'Brak zasiegu sieci', correct: false },
-          { text: 'Zakaz uzywania telefonow', correct: true },
-          { text: 'Koniec strefy WiFi', correct: false }
-        ]
+      error: () => {
+        this.questions = [];
+        this.isLoading = false;
       }
-    ];
+    });
+  }
+
+  /**
+   * Shuffle array to randomize question order
+   */
+  private shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }
 
   startQuiz() {

@@ -1,0 +1,114 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "Co oznacza znak B-1 (czerwone kolo z bialym srodkiem)?",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Zakaz ruchu w obu kierunkach", "correct": true },
+        { "text": "Zakaz wjazdu", "correct": false },
+        { "text": "Zakaz zatrzymywania", "correct": false },
+        { "text": "Droga dla pieszych", "correct": false }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Trojkatny znak z czerwona obwodka i symbolem krowy oznacza:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Gospodarstwo rolne w poblizu", "correct": false },
+        { "text": "Zwierzeta gospodarskie moga pojawic sie na drodze", "correct": true },
+        { "text": "Zakaz wjazdu dla zwierzat", "correct": false },
+        { "text": "Ferma zwierzat", "correct": false }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "Niebieski okragly znak z biala strzalka w prawo oznacza:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Zalecany kierunek jazdy", "correct": false },
+        { "text": "Nakaz jazdy w prawo", "correct": true },
+        { "text": "Informacja o skrecie", "correct": false },
+        { "text": "Parking po prawej stronie", "correct": false }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Znak STOP wymaga:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Zmniejszenia predkosci", "correct": false },
+        { "text": "Zatrzymania pojazdu", "correct": true },
+        { "text": "Ustapienia pierwszenstwa bez zatrzymywania", "correct": false },
+        { "text": "Zwiekszenia ostroznosci", "correct": false }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Znak z przekreslonym telefonem oznacza:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Telefon awaryjny w poblizu", "correct": false },
+        { "text": "Brak zasiegu sieci", "correct": false },
+        { "text": "Zakaz uzywania telefonow", "correct": true },
+        { "text": "Koniec strefy WiFi", "correct": false }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "Co oznacza znak A-1 (trojkat z zakrecona strzalka w prawo)?",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Skret w prawo", "correct": false },
+        { "text": "Niebezpieczny zakret w prawo", "correct": true },
+        { "text": "Nakaz skretu w prawo", "correct": false },
+        { "text": "Objazd w prawo", "correct": false }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Znak D-6 (niebieski kwadrat z biala zebra) oznacza:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Przejscie dla pieszych", "correct": true },
+        { "text": "Zakaz przechodzenia", "correct": false },
+        { "text": "Sciezka dla pieszych", "correct": false },
+        { "text": "Strefa piesza", "correct": false }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "Znak ograniczenia predkosci do 50 km/h oznacza:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Zalecana predkosc 50 km/h", "correct": false },
+        { "text": "Minimalna predkosc 50 km/h", "correct": false },
+        { "text": "Maksymalna dozwolona predkosc 50 km/h", "correct": true },
+        { "text": "Srednia predkosc na odcinku", "correct": false }
+      ]
+    },
+    {
+      "id": 9,
+      "question": "Znak C-13 (niebieski okrag z rowerem) oznacza:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Zakaz wjazdu rowerow", "correct": false },
+        { "text": "Droga dla rowerow", "correct": true },
+        { "text": "Wypozyczalnia rowerow", "correct": false },
+        { "text": "Parking dla rowerow", "correct": false }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Znak A-17 (trojkat z dziecmi) ostrzega przed:",
+      "imageUrl": null,
+      "answers": [
+        { "text": "Szkola w poblizu", "correct": false },
+        { "text": "Plac zabaw", "correct": false },
+        { "text": "Dziecmi na drodze", "correct": true },
+        { "text": "Przedszkolem", "correct": false }
+      ]
+    }
+  ]
+}
