@@ -23,7 +23,7 @@
       "code": "A-7",
       "name": "Ustap pierwszenstwa",
       "description": "Nakaz ustapienia pierwszenstwa przejazdu",
-      "category": "PRIORITY",
+      "category": "WARNING",
       "imageUrl": null,
       "kidFriendlyDescription": "Musisz przepuscic inne samochody, ktore jada glowna droga."
     },
