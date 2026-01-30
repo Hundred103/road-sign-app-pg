@@ -5,7 +5,7 @@ This folder contains static assets for the Road Sign Learning App.
 ## Structure
 
 ```
-assets/
+assets/media/
 ├── signs/          # Road sign images
 │   ├── warning/    # Warning signs (A-series)
 │   ├── prohibition/# Prohibition signs (B-series)

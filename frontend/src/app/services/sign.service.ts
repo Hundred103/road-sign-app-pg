@@ -49,9 +49,19 @@ export class SignService {
   }
 
   /**
-   * Get quiz questions from local JSON file (assets/data/quiz-questions.json)
+   * Get quiz questions - tries API first, falls back to local JSON
    */
   getQuizQuestions(): Observable<QuizQuestion[]> {
+    const apiUrl = `${environment.apiUrl}/quiz-questions`;
+    return this.http.get<QuizQuestion[]>(apiUrl).pipe(
+      catchError(() => this.getQuizQuestionsFromJson())
+    );
+  }
+
+  /**
+   * Load quiz questions from local JSON file (assets/data/quiz-questions.json)
+   */
+  getQuizQuestionsFromJson(): Observable<QuizQuestion[]> {
     return this.http.get<{ questions: QuizQuestion[] }>('/assets/data/quiz-questions.json').pipe(
       map(data => data.questions),
       catchError(() => of([]))
