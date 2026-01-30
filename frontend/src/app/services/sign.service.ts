@@ -43,7 +43,7 @@ export class SignService {
    */
   getSignsFromJson(): Observable<RoadSign[]> {
     return this.http.get<{ signs: RoadSign[] }>('/assets/data/road-signs.json').pipe(
-      map(data => data.signs),
+      map((data: { signs: RoadSign[] }) => data.signs),
       catchError(() => of([]))
     );
   }
@@ -52,7 +52,7 @@ export class SignService {
    * Get quiz questions - tries API first, falls back to local JSON
    */
   getQuizQuestions(): Observable<QuizQuestion[]> {
-    const apiUrl = `${environment.apiUrl}/quiz-questions`;
+    const apiUrl = `${environment.apiUrl}/quiz`;
     return this.http.get<QuizQuestion[]>(apiUrl).pipe(
       catchError(() => this.getQuizQuestionsFromJson())
     );
@@ -63,7 +63,7 @@ export class SignService {
    */
   getQuizQuestionsFromJson(): Observable<QuizQuestion[]> {
     return this.http.get<{ questions: QuizQuestion[] }>('/assets/data/quiz-questions.json').pipe(
-      map(data => data.questions),
+      map((data: { questions: QuizQuestion[] }) => data.questions),
       catchError(() => of([]))
     );
   }

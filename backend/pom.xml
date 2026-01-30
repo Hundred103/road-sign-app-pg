@@ -14,6 +14,7 @@
     <modules>
         <module>gateway</module>
         <module>sign-service</module>
+        <module>quiz-service</module>
         <module>user-service</module>
     </modules>
 

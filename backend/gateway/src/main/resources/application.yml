@@ -14,17 +14,17 @@ spring:
           filters:
             - StripPrefix=1
 
-        - id: user-service
-          uri: ${USER_SERVICE_URL:http://localhost:8082}
+        - id: quiz-service
+          uri: ${QUIZ_SERVICE_URL:http://localhost:8082}
           predicates:
-            - Path=/api/users/**
+            - Path=/api/quiz/**
           filters:
             - StripPrefix=1
 
-        - id: quiz-service
-          uri: ${SIGN_SERVICE_URL:http://localhost:8081}
+        - id: user-service
+          uri: ${USER_SERVICE_URL:http://localhost:8083}
           predicates:
-            - Path=/api/quiz/**
+            - Path=/api/users/**
           filters:
             - StripPrefix=1
 
