@@ -48,6 +48,7 @@
   padding: 20px;
   text-align: center;
   cursor: pointer;
+  position: relative;
   transition: transform 0.2s, box-shadow 0.2s;
 
   &:hover {
@@ -76,6 +77,69 @@
     color: #666;
     font-size: 0.9rem;
   }
+}
+
+.tile-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.status {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status.viewed {
+  background: #e8f5e9;
+  border: 1px solid #4caf50;
+}
+
+.status.review {
+  background: #fff8e1;
+  border: 1px solid #f9a825;
+}
+
+.check-icon {
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #2e7d32;
+  border-bottom: 2px solid #2e7d32;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.time-icon {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #f9a825;
+  border-radius: 50%;
+  position: relative;
+}
+
+.time-icon::before,
+.time-icon::after {
+  content: '';
+  position: absolute;
+  background: #f9a825;
+  left: 50%;
+  top: 50%;
+  transform-origin: bottom center;
+}
+
+.time-icon::before {
+  width: 2px;
+  height: 4px;
+  transform: translate(-50%, -100%);
+}
+
+.time-icon::after {
+  width: 2px;
+  height: 3px;
+  transform: translate(-50%, -100%) rotate(90deg);
 }
 
 .sign-detail-overlay {

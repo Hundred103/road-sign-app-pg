@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pg.roadsign.sign.dto.TileViewResponse;
 import pl.edu.pg.roadsign.sign.entity.RoadSign;
 import pl.edu.pg.roadsign.sign.entity.SignCategory;
 import pl.edu.pg.roadsign.sign.service.RoadSignService;
@@ -39,6 +40,16 @@ public class RoadSignController {
         return roadSignService.getSignByCode(code)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/views")
+    public ResponseEntity<List<TileViewResponse>> getUserTileViews(@RequestParam Long userId) {
+        return ResponseEntity.ok(roadSignService.getUserTileViews(userId).stream().map(TileViewResponse::from).toList());
+    }
+
+    @PostMapping("/{id}/views")
+    public ResponseEntity<TileViewResponse> markTileViewed(@PathVariable Long id, @RequestParam Long userId) {
+        return ResponseEntity.ok(TileViewResponse.from(roadSignService.markTileViewed(id, userId)));
     }
 
     @PostMapping

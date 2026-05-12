@@ -13,6 +13,14 @@
   
   <div class="signs-grid">
     <div *ngFor="let sign of filteredSigns" class="sign-card" (click)="selectSign(sign)">
+      <div class="tile-status" *ngIf="isLoggedIn">
+        <span class="status viewed" *ngIf="tileStatus(sign.id) === 'VIEWED'" title="Przejrzane">
+          <span class="check-icon"></span>
+        </span>
+        <span class="status review" *ngIf="tileStatus(sign.id) === 'REVIEW'" title="Wymaga powtorki">
+          <span class="time-icon"></span>
+        </span>
+      </div>
       <div class="sign-image">
         <img [src]="sign.imageUrl || '/assets/signs/placeholder.png'" [alt]="sign.name">
       </div>

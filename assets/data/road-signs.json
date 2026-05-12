@@ -3,29 +3,29 @@
     {
       "id": 1,
       "code": "A-1",
-      "name": "Niebezpieczny zakret w prawo",
-      "description": "Ostrzega o niebezpiecznym zakrecie w prawo",
+      "name": "Niebezpieczny zakręt w prawo",
+      "description": "Ostrzega o niebezpiecznym zakręcie w prawo",
       "category": "WARNING",
       "imageUrl": null,
-      "kidFriendlyDescription": "Uwaga! Droga skreca w prawo. Kierowca musi jechac wolniej."
+      "kidFriendlyDescription": "Uwaga! Droga skręca w prawo. Kierowca musi jechać wolniej."
     },
     {
       "id": 2,
       "code": "A-2",
-      "name": "Niebezpieczny zakret w lewo",
-      "description": "Ostrzega o niebezpiecznym zakrecie w lewo",
+      "name": "Niebezpieczny zakręt w lewo",
+      "description": "Ostrzega o niebezpiecznym zakręcie w lewo",
       "category": "WARNING",
       "imageUrl": null,
-      "kidFriendlyDescription": "Uwaga! Droga skreca w lewo. Trzeba zwolnic!"
+      "kidFriendlyDescription": "Uwaga! Droga skręca w lewo. Trzeba zwolnić!"
     },
     {
       "id": 3,
       "code": "A-7",
-      "name": "Ustap pierwszenstwa",
-      "description": "Nakaz ustapienia pierwszenstwa przejazdu",
+      "name": "Ustąp pierwszeństwa",
+      "description": "Nakaz ustąpienia pierwszeństwa przejazdu",
       "category": "WARNING",
       "imageUrl": null,
-      "kidFriendlyDescription": "Musisz przepuscic inne samochody, ktore jada glowna droga."
+      "kidFriendlyDescription": "Musisz przepuścić inne samochody, które jadą główną drogą."
     },
     {
       "id": 4,

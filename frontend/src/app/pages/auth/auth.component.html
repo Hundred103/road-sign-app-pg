@@ -1,0 +1,69 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="mode-switch">
+      <button
+        type="button"
+        class="mode-btn"
+        [class.active]="mode === 'login'"
+        (click)="setMode('login')"
+      >
+        Logowanie
+      </button>
+      <button
+        type="button"
+        class="mode-btn"
+        [class.active]="mode === 'register'"
+        (click)="setMode('register')"
+      >
+        Rejestracja
+      </button>
+    </div>
+
+    <h1>{{ mode === 'login' ? 'Witaj ponownie' : 'Zaloz konto' }}</h1>
+
+    <form *ngIf="mode === 'login'" (ngSubmit)="onLogin()">
+      <label>
+        Nazwa uzytkownika
+        <input type="text" name="loginUsername" [(ngModel)]="loginData.username" required />
+      </label>
+
+      <label>
+        Haslo
+        <input type="password" name="loginPassword" [(ngModel)]="loginData.password" required />
+      </label>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Logowanie...' : 'Zaloguj sie' }}
+      </button>
+    </form>
+
+    <form *ngIf="mode === 'register'" (ngSubmit)="onRegister()">
+      <label>
+        Nazwa uzytkownika
+        <input type="text" name="registerUsername" [(ngModel)]="registerData.username" minlength="3" required />
+      </label>
+
+      <label>
+        E-mail
+        <input type="email" name="registerEmail" [(ngModel)]="registerData.email" required />
+      </label>
+
+      <label>
+        Haslo
+        <input type="password" name="registerPassword" [(ngModel)]="registerData.password" minlength="6" required />
+      </label>
+
+      <label>
+        Wyswietlana nazwa (opcjonalnie)
+        <input type="text" name="registerDisplayName" [(ngModel)]="registerData.displayName" />
+      </label>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Tworzenie konta...' : 'Zarejestruj sie' }}
+      </button>
+    </form>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <a routerLink="/" class="back-link">Wroc na strone glowna</a>
+  </div>
+</div>

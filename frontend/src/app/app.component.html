@@ -6,6 +6,10 @@
         <a routerLink="/" class="nav-link">Start</a>
         <a routerLink="/course" class="nav-link">Kurs</a>
         <a routerLink="/quiz" class="nav-link">Quiz</a>
+        <a routerLink="/auth" class="nav-link" *ngIf="!(currentUser$ | async)">Zaloguj</a>
+        <button class="nav-link nav-btn" *ngIf="currentUser$ | async as user" (click)="onLogout()">
+          Wyloguj ({{ user.displayName || user.username }})
+        </button>
       </div>
     </nav>
   </header>

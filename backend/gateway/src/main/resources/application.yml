@@ -28,6 +28,11 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: frontend-service
+          uri: ${FRONTEND_URL:http://frontend:80}
+          predicates:
+            - Path=/**
+
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
 
@@ -42,7 +47,7 @@ spring:
               - DELETE
               - OPTIONS
             allowedHeaders: "*"
-            allowCredentials: false
+            allowCredentials: true
 
 management:
   endpoints:

@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.roadsign.sign.entity.RoadSign;
 import pl.edu.pg.roadsign.sign.entity.SignCategory;
+import pl.edu.pg.roadsign.sign.entity.view.SignTileView;
 import pl.edu.pg.roadsign.sign.repository.RoadSignRepository;
+import pl.edu.pg.roadsign.sign.repository.view.SignTileViewRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,7 @@ import java.util.Optional;
 public class RoadSignService {
 
     private final RoadSignRepository roadSignRepository;
+    private final SignTileViewRepository signTileViewRepository;
 
     public List<RoadSign> getAllSigns() {
         return roadSignRepository.findAll();
@@ -56,5 +60,18 @@ public class RoadSignService {
     @Transactional
     public void deleteSign(Long id) {
         roadSignRepository.deleteById(id);
+    }
+
+    public List<SignTileView> getUserTileViews(Long userId) {
+        return signTileViewRepository.findByUserId(userId);
+    }
+
+    @Transactional
+    public SignTileView markTileViewed(Long signId, Long userId) {
+        SignTileView view = signTileViewRepository.findByUserIdAndSignId(userId, signId)
+            .orElse(SignTileView.builder().userId(userId).signId(signId).build());
+
+        view.setLastViewedAt(LocalDateTime.now());
+        return signTileViewRepository.save(view);
     }
 }

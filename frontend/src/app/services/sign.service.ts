@@ -21,6 +21,11 @@ export interface QuizQuestion {
   answers: { text: string; correct: boolean }[];
 }
 
+export interface TileViewStatus {
+  signId: number;
+  lastViewedAt: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -74,5 +79,13 @@ export class SignService {
 
   getSignsByCategory(category: string): Observable<RoadSign[]> {
     return this.http.get<RoadSign[]>(`${this.apiUrl}/category/${category}`);
+  }
+
+  getTileViews(userId: number): Observable<TileViewStatus[]> {
+    return this.http.get<TileViewStatus[]>(`${this.apiUrl}/views?userId=${userId}`);
+  }
+
+  markTileViewed(signId: number, userId: number): Observable<TileViewStatus> {
+    return this.http.post<TileViewStatus>(`${this.apiUrl}/${signId}/views?userId=${userId}`, {});
   }
 }
