@@ -4,16 +4,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pg.roadsign.quiz.dto.QuizResponse;
+import pl.edu.pg.roadsign.quiz.dto.QuizResultResponse;
 import pl.edu.pg.roadsign.quiz.entity.QuizAnswer;
+import pl.edu.pg.roadsign.quiz.entity.Quiz;
 import pl.edu.pg.roadsign.quiz.entity.QuizQuestion;
 import pl.edu.pg.roadsign.quiz.service.QuizService;
+import pl.edu.pg.roadsign.quiz.entity.QuizResult;
+import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.Objects;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping({"/quiz", "/quiz-questions"})
@@ -22,29 +26,105 @@ public class QuizController {
 
     private final QuizService quizService;
 
+    @GetMapping("/quizzes")
+    public ResponseEntity<List<QuizResponse>> getAllQuizzes() {
+        return ResponseEntity.ok(quizService.getAllQuizzes());
+    }
+
+    @GetMapping("/quizzes/{id}")
+    public ResponseEntity<QuizResponse> getQuizById(@PathVariable Long id) {
+        return quizService.getQuizById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/quizzes")
+    public ResponseEntity<QuizResponse> createQuiz(@RequestBody Quiz quiz) {
+        Quiz created = quizService.createQuiz(quiz);
+        return ResponseEntity.status(HttpStatus.CREATED).body(quizService.toResponse(created));
+    }
+
+    @PutMapping("/quizzes/{id}")
+    public ResponseEntity<QuizResponse> updateQuiz(@PathVariable Long id, @RequestBody Quiz quiz) {
+        return ResponseEntity.ok(quizService.toResponse(quizService.updateQuiz(id, quiz)));
+    }
+
+    @DeleteMapping("/quizzes/{id}")
+    public ResponseEntity<Void> deleteQuiz(@PathVariable Long id) {
+        quizService.deleteQuiz(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/quizzes/{id}/questions")
+    public ResponseEntity<List<Map<String, Object>>> getQuestionsForQuiz(@PathVariable Long id) {
+        List<Map<String, Object>> dto = quizService.getQuestionsForQuiz(id).stream().map(this::toDto).toList();
+        return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/quizzes/{id}/questions")
+    public ResponseEntity<Map<String, Object>> createQuestionForQuiz(@PathVariable Long id, @RequestBody Object payload) {
+        QuizQuestion qEntity = fromPayload(payload);
+        QuizQuestion created = quizService.createQuestionForQuiz(id, qEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(toDto(created));
+    }
+
+    @PostMapping("/quizzes/{id}/results")
+    public ResponseEntity<QuizResultResponse> submitResult(@PathVariable Long id, @RequestBody Map<String, Object> payload, @RequestParam(required = false) Long userId, HttpSession session) {
+        Integer score = payload.get("score") instanceof Number ? ((Number) payload.get("score")).intValue() : null;
+        Integer maxScore = payload.get("maxScore") instanceof Number ? ((Number) payload.get("maxScore")).intValue() : null;
+        if (score == null || maxScore == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (userId == null) {
+            Object sid = session.getAttribute("userId");
+            if (sid instanceof Number) userId = ((Number) sid).longValue();
+            else if (sid instanceof String) {
+                try { userId = Long.valueOf((String) sid); } catch (NumberFormatException ignored) {}
+            }
+        }
+
+        QuizResult result = quizService.submitResult(id, userId, score, maxScore);
+        return ResponseEntity.ok(QuizResultResponse.from(result));
+    }
+
+    @GetMapping("/quizzes/{id}/best")
+    public ResponseEntity<QuizResultResponse> getBestForQuiz(@PathVariable Long id, @RequestParam(required = false) Long userId, HttpSession session) {
+        if (userId == null) {
+            Object sid = session.getAttribute("userId");
+            if (sid instanceof Number) userId = ((Number) sid).longValue();
+            else if (sid instanceof String) {
+                try { userId = Long.valueOf((String) sid); } catch (NumberFormatException ignored) {}
+            }
+        }
+        if (userId == null) return ResponseEntity.badRequest().build();
+        return quizService.getBestResult(id, userId)
+                .map(r -> ResponseEntity.ok(QuizResultResponse.from(r)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
-    public ResponseEntity<List<Object>> getAllQuestions() {
-        List<QuizQuestion> list = quizService.getAllQuestions();
-        List<Object> dto = list.stream().map(this::toDto).collect(Collectors.toList());
+    public ResponseEntity<List<Map<String, Object>>> getAllQuestions() {
+        List<Map<String, Object>> dto = quizService.getAllQuestions().stream().map(this::toDto).collect(Collectors.toList());
         return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getQuestionById(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> getQuestionById(@PathVariable Long id) {
         return quizService.getQuestionById(id)
-                .map(q -> ResponseEntity.ok((Object) toDto(q)))
+                .map(q -> ResponseEntity.ok(toDto(q)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Object> createQuestion(@RequestBody Object payload) {
+    public ResponseEntity<Map<String, Object>> createQuestion(@RequestBody Object payload) {
         QuizQuestion qEntity = fromPayload(payload);
         QuizQuestion created = quizService.createQuestion(qEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(toDto(created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateQuestion(@PathVariable Long id, @RequestBody Object payload) {
+    public ResponseEntity<Map<String, Object>> updateQuestion(@PathVariable Long id, @RequestBody Object payload) {
         QuizQuestion qEntity = fromPayload(payload);
         QuizQuestion updated = quizService.updateQuestion(id, qEntity);
         return ResponseEntity.ok(toDto(updated));

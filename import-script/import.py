@@ -9,10 +9,11 @@ It reads JSON files from `assets/data/road-signs.json` and `assets/data/quiz-que
 assigns `imageUrl` when matching image files under `frontend/src/assets/signs/...`, and
 POSTs/PUTs data to the gateway endpoints:
   - /api/signs
-  - /api/quiz
+    - /api/quiz/quizzes
+    - /api/quiz/quizzes/{id}/questions
 
-The script checks for existing entries by `code` (signs) and by question text (quiz) to decide
-whether to create (POST) or update (PUT).
+The script checks for existing entries by `code` (signs), quiz `code`, and by question text within
+each quiz to decide whether to create (POST) or update (PUT).
 """
 
 import argparse
@@ -117,55 +118,110 @@ def extract_code_from_text(text: str) -> Optional[str]:
 
 def upsert_quiz(base_api: str, assets_dir: str, quiz_json_path: str, signs_lookup: Dict[str, Dict]):
     data = load_json(quiz_json_path)
-    questions = data.get('questions', [])
     session = requests.Session()
 
-    # fetch existing questions to detect updates
+    quizzes = data.get('quizzes')
+    if not quizzes:
+        quizzes = [{
+            'code': 'road-signs-basics',
+            'title': 'Znaki drogowe - podstawy',
+            'description': 'Obecny quiz z podstawowymi pytaniami o znaki drogowe.',
+            'defaultQuiz': True,
+            'questions': data.get('questions', [])
+        }]
+
+    # fetch existing quizzes to detect updates
     try:
-        r = session.get(f"{base_api}/quiz")
+        r = session.get(f"{base_api}/quiz/quizzes")
         existing = r.json() if r.status_code == 200 else []
     except requests.RequestException:
         existing = []
 
-    existing_map = { (q.get('questionText') or q.get('question') or '').strip().lower(): q for q in existing }
+    existing_map = { (q.get('code') or '').strip().lower(): q for q in existing }
 
-    for q in questions:
-        text = q.get('question') or q.get('questionText') or ''
-        payload = {
-            'questionText': text,
-            'imageUrl': q.get('imageUrl'),
-            'answers': []
+    for quiz in quizzes:
+        quiz_code = (quiz.get('code') or '').strip()
+        if not quiz_code:
+            print('Skipping quiz without code')
+            continue
+
+        quiz_payload = {
+            'code': quiz_code,
+            'title': quiz.get('title'),
+            'description': quiz.get('description'),
+            'defaultQuiz': bool(quiz.get('defaultQuiz') or quiz.get('isDefault'))
         }
 
-        # try to find code inside question text and map to sign image
-        if not payload['imageUrl']:
-            code = extract_code_from_text(text)
-            if code and code in signs_lookup:
-                payload['imageUrl'] = signs_lookup[code].get('imageUrl')
-
-        for a in q.get('answers', []):
-            payload['answers'].append({'answerText': a.get('text'), 'isCorrect': bool(a.get('correct'))})
-
-        key = text.strip().lower()
-        if key in existing_map:
-            qid = existing_map[key].get('id')
-            if qid:
-                print(f"Updating question id={qid}")
-                try:
-                    up = session.put(f"{base_api}/quiz/{qid}", json=payload)
-                    print(f"  -> {up.status_code}")
-                except requests.RequestException as e:
-                    print(f"  ERROR updating question: {e}")
-                time.sleep(0.05)
+        if quiz_code.lower() in existing_map:
+            quiz_id = existing_map[quiz_code.lower()].get('id')
+            print(f"Updating quiz {quiz_code} (id={quiz_id})...")
+            try:
+                up = session.put(f"{base_api}/quiz/quizzes/{quiz_id}", json=quiz_payload)
+                print(f"  -> {up.status_code}")
+                quiz_id = up.json().get('id', quiz_id) if up.status_code < 300 else quiz_id
+            except requests.RequestException as e:
+                print(f"  ERROR updating quiz: {e}")
+                continue
+        else:
+            print(f"Creating quiz {quiz_code}...")
+            try:
+                created = session.post(f"{base_api}/quiz/quizzes", json=quiz_payload)
+                print(f"  -> {created.status_code}")
+                quiz_id = created.json().get('id') if created.status_code < 300 else None
+            except requests.RequestException as e:
+                print(f"  ERROR creating quiz: {e}")
                 continue
 
-        print(f"Creating question: {text[:60]}...")
+        if not quiz_id:
+            print(f"  Skipping questions for {quiz_code}: missing quiz id")
+            continue
+
         try:
-            p = session.post(f"{base_api}/quiz", json=payload)
-            print(f"  -> {p.status_code}")
-        except requests.RequestException as e:
-            print(f"  ERROR creating question: {e}")
-        time.sleep(0.05)
+            r = session.get(f"{base_api}/quiz/quizzes/{quiz_id}/questions")
+            existing_questions = r.json() if r.status_code == 200 else []
+        except requests.RequestException:
+            existing_questions = []
+
+        existing_question_map = {
+            (q.get('question') or '').strip().lower(): q for q in existing_questions
+        }
+
+        for q in quiz.get('questions', []):
+            text = q.get('question') or q.get('questionText') or ''
+            payload = {
+                'questionText': text,
+                'imageUrl': q.get('imageUrl'),
+                'answers': []
+            }
+
+            if not payload['imageUrl']:
+                code = extract_code_from_text(text)
+                if code and code in signs_lookup:
+                    payload['imageUrl'] = signs_lookup[code].get('imageUrl')
+
+            for a in q.get('answers', []):
+                payload['answers'].append({'answerText': a.get('text'), 'isCorrect': bool(a.get('correct'))})
+
+            key = text.strip().lower()
+            if key in existing_question_map:
+                qid = existing_question_map[key].get('id')
+                if qid:
+                    print(f"  Updating question id={qid}")
+                    try:
+                        up = session.put(f"{base_api}/quiz/{qid}", json=payload)
+                        print(f"    -> {up.status_code}")
+                    except requests.RequestException as e:
+                        print(f"    ERROR updating question: {e}")
+                    time.sleep(0.05)
+                    continue
+
+            print(f"  Creating question: {text[:60]}...")
+            try:
+                p = session.post(f"{base_api}/quiz/quizzes/{quiz_id}/questions", json=payload)
+                print(f"    -> {p.status_code}")
+            except requests.RequestException as e:
+                print(f"    ERROR creating question: {e}")
+            time.sleep(0.05)
 
 
 def build_signs_lookup(signs_json_path: str, assets_dir: str) -> Dict[str, Dict]:

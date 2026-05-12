@@ -21,6 +21,19 @@ export interface QuizQuestion {
   answers: { text: string; correct: boolean }[];
 }
 
+export interface QuizDefinition {
+  id: number;
+  code: string;
+  title: string;
+  description: string | null;
+  defaultQuiz: boolean;
+  questionCount: number;
+  bestScore?: number | null;
+  bestMax?: number | null;
+  bestPercentage?: number | null;
+  bestAchievedAt?: string | null;
+}
+
 export interface TileViewStatus {
   signId: number;
   lastViewedAt: string;
@@ -61,6 +74,31 @@ export class SignService {
     return this.http.get<QuizQuestion[]>(apiUrl).pipe(
       catchError(() => this.getQuizQuestionsFromJson())
     );
+  }
+
+  getQuizzes(): Observable<QuizDefinition[]> {
+    return this.http.get<QuizDefinition[]>(`${environment.apiUrl}/quiz/quizzes`);
+  }
+
+  getBestResultForQuiz(quizId: number, userId?: number): Observable<{ bestScore: number; maxScore: number; percentage: number; achievedAt: string } | null> {
+    let url = `${environment.apiUrl}/quiz/quizzes/${quizId}/best`;
+    if (userId != null) url += `?userId=${userId}`;
+    return this.http.get<{ bestScore: number; maxScore: number; percentage: number; achievedAt: string }>(
+      url, { withCredentials: true }
+    ).pipe(
+      catchError(() => of(null))
+    );
+  }
+
+  submitQuizResult(quizId: number, score: number, maxScore: number, userId?: number): Observable<any> {
+    const payload = { score, maxScore };
+    let url = `${environment.apiUrl}/quiz/quizzes/${quizId}/results`;
+    if (userId != null) url += `?userId=${userId}`;
+    return this.http.post(url, payload, { withCredentials: true });
+  }
+
+  getQuizQuestionsForQuiz(quizId: number): Observable<QuizQuestion[]> {
+    return this.http.get<QuizQuestion[]>(`${environment.apiUrl}/quiz/quizzes/${quizId}/questions`);
   }
 
   /**

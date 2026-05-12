@@ -4,10 +4,25 @@
   </div>
 
   <div *ngIf="!isLoading && !quizStarted && !quizFinished" class="quiz-intro">
-    <h1>Quiz o znakach drogowych</h1>
-    <p>Sprawdz swoja wiedze! Odpowiedz na pytania i zobacz ile punktow zdobedziesz.</p>
+    <h1>{{ selectedQuizTitle }}</h1>
+    <p *ngIf="selectedQuiz?.description">{{ selectedQuiz?.description }}</p>
+    <p *ngIf="!selectedQuiz?.description">Sprawdz swoja wiedze! Odpowiedz na pytania i zobacz ile punktow zdobedziesz.</p>
+
+    <div class="quiz-selector" *ngIf="quizzes.length > 1">
+      <button
+        *ngFor="let quiz of quizzes"
+        type="button"
+        class="quiz-option"
+        [class.active]="selectedQuiz?.id === quiz.id"
+        (click)="selectQuiz(quiz)">
+        <span class="quiz-option-title">{{ quiz.title }}</span>
+        <span class="quiz-option-meta">{{ quiz.questionCount }} pytan</span>
+        <span *ngIf="quiz.bestScore != null" class="quiz-option-best">Najlepszy wynik: {{ quiz.bestScore }}/{{ quiz.bestMax }} ({{ quiz.bestPercentage | number:'1.0-0' }}%)</span>
+      </button>
+    </div>
+
     <p class="question-count">Liczba pytan: {{ questions.length }}</p>
-    <button class="btn btn-primary start-btn" (click)="startQuiz()" [disabled]="questions.length === 0">
+    <button class="btn btn-primary start-btn" (click)="startQuiz()" [disabled]="questions.length === 0 || isLoadingQuizzes">
       Rozpocznij quiz
     </button>
   </div>
@@ -16,6 +31,7 @@
     <div class="progress-bar">
       <div class="progress" [style.width.%]="(currentQuestionIndex + 1) / questions.length * 100"></div>
     </div>
+    <p class="selected-quiz-name">{{ selectedQuizTitle }}</p>
     <p class="question-counter">Pytanie {{ currentQuestionIndex + 1 }} z {{ questions.length }}</p>
     
     <div class="question-card">
@@ -54,11 +70,12 @@
   
   <div *ngIf="quizFinished" class="quiz-result">
     <div class="result-card">
-      <h1>Quiz zakonczony!</h1>
+      <h1>{{ selectedQuizTitle }} zakonczony!</h1>
       <div class="score-display">
         <span class="score">{{ score }}</span>
         <span class="max-score">/ {{ questions.length }}</span>
       </div>
+        <p *ngIf="selectedQuiz?.bestScore != null" class="best-display">Twoj najlepszy wynik: {{ selectedQuiz?.bestScore }}/{{ selectedQuiz?.bestMax }} ({{ selectedQuiz?.bestPercentage | number:'1.0-0' }}%)</p>
       <p class="score-message">{{ getScoreMessage() }}</p>
       <div class="result-actions">
         <button class="btn btn-primary" (click)="restartQuiz()">Sprobuj ponownie</button>
