@@ -14,11 +14,14 @@
   <div class="signs-grid">
     <div *ngFor="let sign of filteredSigns" class="sign-card" (click)="selectSign(sign)">
       <div class="tile-status" *ngIf="isLoggedIn">
-        <span class="status viewed" *ngIf="tileStatus(sign.id) === 'VIEWED'" title="Przejrzane">
+        <span class="status recent" *ngIf="tileStatus(sign.id) === 'RECENT'" title="Przejrzane niedawno">
           <span class="check-icon"></span>
         </span>
         <span class="status review" *ngIf="tileStatus(sign.id) === 'REVIEW'" title="Wymaga powtórki">
           <span class="time-icon"></span>
+        </span>
+        <span class="status forgotten" *ngIf="tileStatus(sign.id) === 'FORGOTTEN'" title="Zapomniane">
+          <span class="forgotten-icon"></span>
         </span>
       </div>
       <div class="sign-image">

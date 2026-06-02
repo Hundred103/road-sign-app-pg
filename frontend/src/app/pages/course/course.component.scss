@@ -81,20 +81,22 @@
 
 .tile-status {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
 }
 
 .status {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
-.status.viewed {
+.status.recent {
   background: #e8f5e9;
   border: 1px solid #4caf50;
 }
@@ -102,6 +104,11 @@
 .status.review {
   background: #fff8e1;
   border: 1px solid #f9a825;
+}
+
+.status.forgotten {
+  background: #ffebee;
+  border: 1px solid #ef5350;
 }
 
 .check-icon {
@@ -140,6 +147,32 @@
   width: 2px;
   height: 3px;
   transform: translate(-50%, -100%) rotate(90deg);
+}
+
+.forgotten-icon {
+  width: 12px;
+  height: 12px;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    background: #ef5350;
+    transform-origin: center;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 }
 
 .sign-detail-overlay {
@@ -258,9 +291,19 @@
     border-color: #66bb6a;
   }
 
+  .status.recent {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #66bb6a;
+  }
+
   .status.review {
     background: rgba(249, 168, 37, 0.22);
     border-color: #ffb74d;
+  }
+
+  .status.forgotten {
+    background: rgba(239, 83, 80, 0.2);
+    border-color: #ef5350;
   }
 
   .sign-detail-card {

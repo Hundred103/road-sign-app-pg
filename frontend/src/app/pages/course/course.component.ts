@@ -97,7 +97,7 @@ export class CourseComponent implements OnInit {
     this.selectedSign = null;
   }
 
-  tileStatus(signId: number): 'NONE' | 'VIEWED' | 'REVIEW' {
+  tileStatus(signId: number): 'NONE' | 'RECENT' | 'REVIEW' | 'FORGOTTEN' {
     const lastViewedAt = this.tileViewMap.get(signId);
     if (!lastViewedAt) {
       return 'NONE';
@@ -106,8 +106,17 @@ export class CourseComponent implements OnInit {
     const viewedAt = new Date(lastViewedAt).getTime();
     const now = Date.now();
     const fiveDaysInMs = 5 * 24 * 60 * 60 * 1000;
+    const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
 
-    return now - viewedAt >= fiveDaysInMs ? 'REVIEW' : 'VIEWED';
+    if (now - viewedAt < fiveDaysInMs) {
+      return 'RECENT';
+    }
+
+    if (now - viewedAt < thirtyDaysInMs) {
+      return 'REVIEW';
+    }
+
+    return 'FORGOTTEN';
   }
 
   private loadTileViews(userId: number) {

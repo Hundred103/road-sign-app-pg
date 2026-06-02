@@ -69,35 +69,43 @@
 
 .quiz-content {
   display: grid;
-  gap: 32px;
+  gap: 20px;
 }
 
 .quiz-group {
   display: grid;
-  gap: 16px;
+  gap: 10px;
 }
 
 .quiz-group-title {
-  margin: 12px 0 6px;
-  padding: 18px 0 12px;
-  color: #2e7d32;
-  font-size: 1.4rem;
+  margin: 8px 0 4px;
+  padding: 8px 0 7px;
+  color: #ffffff;
+  font-size: 1.25rem;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-align: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 // Quiz Selector
 .quiz-selector-section {
   .section-title {
-    color: #333;
+    color: #ffffff;
     font-size: 2rem;
-    margin: 10px 0 28px;
+    margin: 6px 0 12px;
     font-weight: 800;
     text-align: center;
-    padding: 18px 0 22px;
+    padding: 10px 0 9px;
+    letter-spacing: 0.01em;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 48%, #14b8a6 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 24px rgba(14, 165, 233, 0.25);
   }
 
   .quiz-selector {
