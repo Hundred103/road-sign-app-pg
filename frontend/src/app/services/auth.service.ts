@@ -34,27 +34,54 @@ export class AuthService {
 
   constructor(private readonly http: HttpClient) {}
 
+  // Hydrate from localStorage so UI remains logged-in across reloads even if server cookie
+  // handling needs investigation. This is a UX fallback and does not replace server session.
+  initFromStorage(): void {
+    try {
+      const raw = localStorage.getItem('rs-current-user');
+      if (raw) {
+        const parsed = JSON.parse(raw) as AuthUser;
+        this.currentUserSubject.next(parsed);
+        console.log('[DEBUG] AuthService: hydrated user from localStorage', parsed.username);
+      }
+    } catch (e) {
+      console.warn('[DEBUG] AuthService: failed to hydrate user from storage', e);
+    }
+  }
+
   register(payload: RegisterPayload): Observable<AuthUser> {
     return this.http.post<AuthUser>(`${this.apiUrl}/register`, payload, { withCredentials: true }).pipe(
-      tap((user) => this.currentUserSubject.next(user))
+      tap((user) => {
+        this.currentUserSubject.next(user);
+        try { localStorage.setItem('rs-current-user', JSON.stringify(user)); } catch {}
+      })
     );
   }
 
   login(payload: LoginPayload): Observable<AuthUser> {
     return this.http.post<AuthUser>(`${this.apiUrl}/login`, payload, { withCredentials: true }).pipe(
-      tap((user) => this.currentUserSubject.next(user))
+      tap((user) => {
+        this.currentUserSubject.next(user);
+        try { localStorage.setItem('rs-current-user', JSON.stringify(user)); } catch {}
+      })
     );
   }
 
   loadSession(): Observable<AuthUser> {
     return this.http.get<AuthUser>(`${this.apiUrl}/session`, { withCredentials: true }).pipe(
-      tap((user) => this.currentUserSubject.next(user))
+      tap((user) => {
+        this.currentUserSubject.next(user);
+        try { localStorage.setItem('rs-current-user', JSON.stringify(user)); } catch {}
+      })
     );
   }
 
   logout(): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
-      tap(() => this.currentUserSubject.next(null))
+      tap(() => {
+        this.currentUserSubject.next(null);
+        try { localStorage.removeItem('rs-current-user'); } catch {}
+      })
     );
   }
 

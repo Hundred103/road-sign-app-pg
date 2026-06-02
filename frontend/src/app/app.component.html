@@ -5,13 +5,18 @@
         <span class="logo-icon"></span>
         <span>Znaki Drogowe</span>
       </a>
+      <button class="mobile-toggle" type="button" aria-label="Otwórz menu" (click)="toggleMobileNav()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <div class="nav-links">
         <a routerLink="/" class="nav-link">Start</a>
         <a routerLink="/course" class="nav-link">Kurs</a>
         <button class="nav-link nav-link-button" type="button" (click)="openQuizTab()">Quiz</button>
         
         <div class="nav-auth">
-          <a routerLink="/auth" class="nav-link nav-login" *ngIf="!(currentUser$ | async)">Zaloguj się</a>
+          <a routerLink="/auth" class="nav-link nav-login" *ngIf="!(currentUser$ | async)" (click)="closeMobileNav()">Zaloguj się</a>
           
           <div class="user-menu-wrapper" *ngIf="currentUser$ | async as user" (click)="toggleUserMenu()">
             <button class="user-menu-btn" type="button">
@@ -35,6 +40,37 @@
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="mobile-nav" [class.open]="mobileNavOpen" (click)="$event.stopPropagation()">
+        <div class="mobile-nav-links">
+          <a routerLink="/" class="nav-link mobile" (click)="closeMobileNav()">Start</a>
+          <a routerLink="/course" class="nav-link mobile" (click)="closeMobileNav()">Kurs</a>
+          <button class="nav-link nav-link-button mobile" type="button" (click)="openQuizTab(); closeMobileNav()">Quiz</button>
+        </div>
+
+        <!-- Auth / account area at bottom of mobile menu -->
+        <div class="nav-auth mobile-auth">
+          <ng-container *ngIf="!(currentUser$ | async); else loggedInMobile">
+            <a routerLink="/auth" class="nav-link nav-login mobile" (click)="closeMobileNav()">Zaloguj się</a>
+          </ng-container>
+          <ng-template #loggedInMobile>
+            <div class="mobile-user-panel" *ngIf="currentUser$ | async as user">
+              <div class="mobile-user-squircle">
+                <div class="mobile-user-header">
+                  <span class="dropdown-avatar">{{ (user.displayName || user.username | slice:0:1 | uppercase) || 'U' }}</span>
+                  <div class="dropdown-info">
+                    <div class="dropdown-name">{{ user.displayName || user.username }}</div>
+                    <div class="dropdown-email" *ngIf="user.email">{{ user.email }}</div>
+                  </div>
+                </div>
+                <div class="mobile-user-actions">
+                  <button class="dropdown-item logout-btn" (click)="onLogout(); closeMobileNav()" type="button">Wyloguj się</button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </nav>

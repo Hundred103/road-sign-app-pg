@@ -107,6 +107,236 @@
   align-items: center;
 }
 
+/* Mobile toggle and mobile nav panel */
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.mobile-toggle .bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #333;
+  margin: 4px 0;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 200;
+  padding: 8px 12px 16px 12px;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  overflow: hidden;
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+.mobile-nav {
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav .nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Push auth area to bottom of menu */
+.mobile-nav .mobile-auth {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.mobile-nav .nav-login {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  text-align: left;
+}
+
+/* Make mobile login use the primary green palette and look like a squircle button */
+.mobile-nav .nav-login {
+  background: linear-gradient(135deg, var(--primary-color), #45a049);
+  color: var(--text-light);
+  box-shadow: 0 6px 18px rgba(76,175,80,0.18);
+  font-weight: 700;
+  border-radius: 14px;
+  display: inline-block;
+}
+
+/* Mobile toggle color and dark-mode support */
+.mobile-toggle .bar {
+  background: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mobile-toggle .bar {
+    background: #e0e0e0;
+  }
+
+  .mobile-nav {
+    background: linear-gradient(180deg, #242428 0%, #1e1e22 100%);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+  }
+
+  .mobile-nav .nav-link {
+    color: var(--text-light);
+  }
+
+  .mobile-nav .nav-login {
+    background: linear-gradient(135deg, #3e8e3e, #347a37);
+    color: var(--text-light);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  }
+}
+
+/* Mobile user panel inside mobile-nav */
+.mobile-user-panel {
+  padding: 10px 6px 6px 6px;
+  border-radius: 12px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-user-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mobile-user-header .dropdown-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.mobile-user-header .dropdown-info .dropdown-name {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.mobile-user-header .dropdown-info .dropdown-email {
+  color: #666;
+  font-size: 13px;
+}
+
+.mobile-user-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-user-link {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.04);
+  color: var(--text-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Squircle container for mobile user info */
+.mobile-user-squircle {
+  background: white;
+  border-radius: 18px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.mobile-user-squircle .mobile-user-header .dropdown-info .dropdown-name,
+.mobile-user-squircle .mobile-user-link,
+.mobile-user-squircle .dropdown-email {
+  color: var(--text-dark);
+}
+
+.mobile-user-squircle .dropdown-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px; /* slight squircle feel */
+  font-size: 18px;
+}
+
+.mobile-user-panel .logout-btn {
+  background: transparent;
+  color: var(--warning-color);
+  border: none;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mobile-user-panel {
+    background: transparent;
+  }
+
+  .mobile-user-header .dropdown-info .dropdown-name,
+  .mobile-user-link {
+    color: var(--text-light);
+  }
+
+  .mobile-user-header .dropdown-info .dropdown-email {
+    color: #bdbdbd;
+  }
+
+  .mobile-user-link {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .mobile-user-squircle {
+    background: linear-gradient(180deg, #1f1f22 0%, #17171a 100%);
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+  }
+
+  .mobile-user-squircle .mobile-user-header .dropdown-info .dropdown-name,
+  .mobile-user-squircle .mobile-user-link,
+  .mobile-user-squircle .dropdown-email {
+    color: var(--text-light);
+  }
+
+  .mobile-user-squircle .dropdown-avatar {
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    color: white;
+  }
+}
+
 .user-menu-wrapper {
   position: relative;
 }
@@ -356,5 +586,124 @@
 
   .footer {
     background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 16px;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .logo {
+    justify-content: center;
+    font-size: 20px;
+
+    .logo-icon {
+      font-size: 24px;
+    }
+  }
+
+  .nav-links {
+    display: none; /* hide desktop links on mobile; use mobile-nav */
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .nav-auth {
+    display: none; /* hide desktop auth in favor of mobile auth inside mobile-nav */
+  }
+
+  /* Ensure the mobile auth panel inside the mobile-nav is visible */
+  .mobile-nav .mobile-auth,
+  .mobile-nav .nav-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 6px;
+  }
+
+  .nav-link,
+  .nav-login,
+  .nav-link-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .nav-auth {
+    width: 100%;
+  }
+
+  .user-menu-wrapper {
+    width: 100%;
+  }
+
+  .user-menu-btn {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+
+    .user-name {
+      max-width: 100px;
+    }
+  }
+
+  .user-dropdown {
+    width: 100%;
+    min-width: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .main-content {
+    padding: 16px 12px;
+  }
+
+  .footer {
+    padding: 14px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 12px;
+  }
+
+  .logo {
+    font-size: 18px;
+
+    .logo-icon {
+      font-size: 22px;
+    }
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-link,
+  .nav-login,
+  .nav-link-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .user-menu-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
   }
 }

@@ -20,6 +20,68 @@
   }
 }
 
+@media (max-width: 768px) {
+  .hero {
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+    }
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .feature-card {
+    padding: 24px;
+
+    .card-icon {
+      width: 64px;
+      height: 64px;
+
+      &.course-icon::before,
+      &.quiz-icon::before {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .info-section {
+    padding: 24px;
+
+    ul {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .subtitle {
+      font-size: 0.98rem;
+    }
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .info-section {
+    padding: 20px;
+  }
+}
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

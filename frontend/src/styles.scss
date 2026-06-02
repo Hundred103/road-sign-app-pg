@@ -9,12 +9,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Ensure a solid background color to avoid white flash on overscroll (especially on mobile) */
+html, body {
+  background-color: var(--bg-light);
+}
+
 body {
   font-family: 'Nunito', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   color: #333;
   line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* Color palette - kid friendly */
@@ -230,11 +240,63 @@ select {
   }
 }
 
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    padding: 11px 18px;
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+}
+
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #e0e0e0;
+  }
+
+  /* set solid background-color too to prevent white overscroll flash */
+  html, body {
+    background-color: #121216;
   }
 
   :root {
