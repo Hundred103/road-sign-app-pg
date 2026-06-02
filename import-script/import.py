@@ -149,6 +149,7 @@ def upsert_quiz(base_api: str, assets_dir: str, quiz_json_path: str, signs_looku
             'code': quiz_code,
             'title': quiz.get('title'),
             'description': quiz.get('description'),
+            'difficulty': quiz.get('difficulty'),
             'defaultQuiz': bool(quiz.get('defaultQuiz') or quiz.get('isDefault'))
         }
 
@@ -200,7 +201,11 @@ def upsert_quiz(base_api: str, assets_dir: str, quiz_json_path: str, signs_looku
                     payload['imageUrl'] = signs_lookup[code].get('imageUrl')
 
             for a in q.get('answers', []):
-                payload['answers'].append({'answerText': a.get('text'), 'isCorrect': bool(a.get('correct'))})
+                payload['answers'].append({
+                    'answerText': a.get('text'),
+                    'imageUrl': a.get('imageUrl') or a.get('image_url'),
+                    'isCorrect': bool(a.get('correct'))
+                })
 
             key = text.strip().lower()
             if key in existing_question_map:

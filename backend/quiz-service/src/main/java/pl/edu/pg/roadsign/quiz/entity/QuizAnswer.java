@@ -27,6 +27,9 @@ public class QuizAnswer {
     @Column(name = "answer_text", nullable = false)
     private String answerText;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(name = "is_correct")
     private Boolean isCorrect = false;
 }

@@ -36,6 +36,16 @@ export class AppComponent {
     this.userMenuOpen = false;
   }
 
+  openQuizTab(): void {
+    this.userMenuOpen = false;
+    this.router.navigate(['/quiz'], {
+      queryParams: {
+        tab: 'list',
+        t: Date.now()
+      }
+    });
+  }
+
   onLogout(): void {
     this.userMenuOpen = false;
     this.authService.logout().subscribe(() => {

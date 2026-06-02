@@ -78,6 +78,13 @@
   }
 }
 
+.nav-link-button {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
 .nav-login {
   background: linear-gradient(135deg, #4CAF50, #45a049);
   color: white;

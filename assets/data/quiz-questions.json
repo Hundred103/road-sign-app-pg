@@ -944,6 +944,70 @@
           ]
         }
       ]
+    },
+    {
+      "code": "road-signs-answer-images-demo",
+      "title": "Demo: odpowiedzi z obrazkami",
+      "description": "Krótki quiz pokazujący odpowiedzi, które mogą mieć własne obrazki.",
+      "difficulty": "EASY",
+      "defaultQuiz": false,
+      "questions": [
+        {
+          "id": 81,
+          "question": "Który znak oznacza zakaz wjazdu?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "B-1", "imageUrl": "assets/signs/prohibittion/b1.png", "correct": false },
+            { "text": "B-2", "imageUrl": "assets/signs/prohibittion/b2.png", "correct": true },
+            { "text": "B-20", "imageUrl": "assets/signs/prohibittion/b20.png", "correct": false },
+            { "text": "C-1", "imageUrl": "assets/signs/mandatory/c1.png", "correct": false }
+          ]
+        },
+        {
+          "id": 82,
+          "question": "Który znak ostrzega przed niebezpiecznym zakrętem w lewo?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "A-1", "imageUrl": "assets/signs/warning/a1.png", "correct": false },
+            { "text": "A-2", "imageUrl": "assets/signs/warning/a2.png", "correct": true },
+            { "text": "A-7", "imageUrl": "assets/signs/warning/a7.png", "correct": false },
+            { "text": "A-17", "imageUrl": "assets/signs/warning/a17.png", "correct": false }
+          ]
+        },
+        {
+          "id": 83,
+          "question": "Który znak nakazuje jazdę w prawo?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "C-1", "imageUrl": "assets/signs/mandatory/c1.png", "correct": true },
+            { "text": "C-2", "imageUrl": "assets/signs/mandatory/c2.png", "correct": false },
+            { "text": "C-12", "imageUrl": "assets/signs/mandatory/c12.png", "correct": false },
+            { "text": "C-13", "imageUrl": "assets/signs/mandatory/c13.png", "correct": false }
+          ]
+        },
+        {
+          "id": 84,
+          "question": "Który znak informuje o przejściu dla pieszych?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "D-1", "imageUrl": "assets/signs/information/d1.png", "correct": false },
+            { "text": "D-6", "imageUrl": "assets/signs/information/d6.png", "correct": true },
+            { "text": "D-18", "imageUrl": "assets/signs/information/d18.png", "correct": false },
+            { "text": "D-40", "imageUrl": "assets/signs/information/d40.png", "correct": false }
+          ]
+        },
+        {
+          "id": 85,
+          "question": "Który znak ostrzega przed dziećmi na drodze?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "A-18a", "imageUrl": "assets/signs/warning/a18a.png", "correct": false },
+            { "text": "A-17", "imageUrl": "assets/signs/warning/a17.png", "correct": true },
+            { "text": "A-23", "imageUrl": "assets/signs/warning/a23.png", "correct": false },
+            { "text": "B-33", "imageUrl": "assets/signs/prohibittion/b33.png", "correct": false }
+          ]
+        }
+      ]
     }
   ]
 }

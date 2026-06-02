@@ -162,6 +162,7 @@ public class QuizController {
         List<Map<String, Object>> answers = q.getAnswers().stream().map(a -> {
             Map<String, Object> am = new HashMap<>();
             am.put("text", a.getAnswerText());
+            am.put("imageUrl", a.getImageUrl());
             am.put("correct", a.getIsCorrect() != null ? a.getIsCorrect() : false);
             return am;
         }).collect(Collectors.toList());
@@ -192,6 +193,8 @@ public class QuizController {
                         Map<String, Object> am = (Map<String, Object>) ao;
                         QuizAnswer a = new QuizAnswer();
                         a.setAnswerText(Objects.toString(am.getOrDefault("text", am.get("answerText")), null));
+                        Object ansImg = am.getOrDefault("imageUrl", am.get("image_url"));
+                        a.setImageUrl(ansImg != null ? ansImg.toString() : null);
                         Object cor = am.getOrDefault("correct", am.get("isCorrect"));
                         a.setIsCorrect(Boolean.valueOf(Objects.toString(cor, "false")));
                         a.setQuestion(q);

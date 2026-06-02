@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS answers (
     id BIGSERIAL PRIMARY KEY,
     question_id BIGINT NOT NULL,
     answer_text VARCHAR(255) NOT NULL,
+    image_url VARCHAR(500),
     is_correct BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
 );

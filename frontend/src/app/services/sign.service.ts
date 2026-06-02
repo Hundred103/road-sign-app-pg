@@ -18,7 +18,7 @@ export interface QuizQuestion {
   id: number;
   question: string;
   imageUrl?: string;
-  answers: { text: string; correct: boolean }[];
+  answers: { text: string; correct: boolean; imageUrl?: string | null }[];
 }
 
 export interface QuizDefinition {
@@ -26,8 +26,10 @@ export interface QuizDefinition {
   code: string;
   title: string;
   description: string | null;
+  difficulty: 'EASY' | 'MEDIUM' | 'HARD' | 'DEMO' | string;
   defaultQuiz: boolean;
   questionCount: number;
+  imageUrl?: string | null;
   bestScore?: number | null;
   bestMax?: number | null;
   bestPercentage?: number | null;
@@ -117,8 +119,8 @@ export class SignService {
       payload, 
       { withCredentials: true, headers }
     ).pipe(
-      tap(response => console.log('[DEBUG] saveRanking response:', response)),
-      catchError(err => {
+          tap((response: { saved: boolean; reason?: string }) => console.log('[DEBUG] saveRanking response:', response)),
+          catchError((err: unknown) => {
         console.error('[DEBUG] saveRanking error:', err);
         return of({ saved: false, reason: 'Błąd sieci' });
       })
@@ -130,8 +132,18 @@ export class SignService {
   }
 
   getQuizQuestionsFromJson(): Observable<QuizQuestion[]> {
-    return this.http.get<{ questions: QuizQuestion[] }>('/assets/data/quiz-questions.json').pipe(
-      map((data: { questions: QuizQuestion[] }) => data.questions),
+    return this.http.get<{ questions?: QuizQuestion[]; quizzes?: Array<{ questions?: QuizQuestion[] }> }>('/assets/data/quiz-questions.json').pipe(
+      map((data: { questions?: QuizQuestion[]; quizzes?: Array<{ questions?: QuizQuestion[] }> }) => {
+        if (Array.isArray(data.questions)) {
+          return data.questions;
+        }
+
+        if (Array.isArray(data.quizzes)) {
+          return data.quizzes.flatMap((quiz: { questions?: QuizQuestion[] }) => Array.isArray(quiz.questions) ? quiz.questions : []);
+        }
+
+        return [];
+      }),
       catchError(() => of([]))
     );
   }

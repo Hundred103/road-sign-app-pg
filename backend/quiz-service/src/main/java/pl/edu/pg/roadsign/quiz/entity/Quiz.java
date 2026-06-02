@@ -31,6 +31,9 @@ public class Quiz {
     @Column(length = 1000)
     private String description;
 
+    @Column(length = 20)
+    private String difficulty;
+
     @Column(name = "is_default", nullable = false)
     private Boolean defaultQuiz = false;
 

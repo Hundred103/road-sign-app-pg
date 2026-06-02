@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS quizzes (
     code VARCHAR(100) NOT NULL UNIQUE,
     title VARCHAR(255) NOT NULL,
     description VARCHAR(1000),
+    difficulty VARCHAR(20),
     is_default BOOLEAN NOT NULL DEFAULT FALSE
 );
 
