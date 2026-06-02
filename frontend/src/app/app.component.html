@@ -8,7 +8,7 @@
       <div class="nav-links">
         <a routerLink="/" class="nav-link">Start</a>
         <a routerLink="/course" class="nav-link">Kurs</a>
-        <a routerLink="/quiz" class="nav-link">Quiz</a>
+        <button class="nav-link nav-link-button" type="button" (click)="openQuizTab()">Quiz</button>
         
         <div class="nav-auth">
           <a routerLink="/auth" class="nav-link nav-login" *ngIf="!(currentUser$ | async)">Zaloguj się</a>

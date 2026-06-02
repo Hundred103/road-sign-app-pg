@@ -28,8 +28,7 @@ export class CourseComponent implements OnInit {
     { value: 'WARNING', label: 'Ostrzegawcze' },
     { value: 'PROHIBITION', label: 'Zakazu' },
     { value: 'MANDATORY', label: 'Nakazu' },
-    { value: 'INFORMATION', label: 'Informacyjne' },
-    { value: 'PRIORITY', label: 'Pierwszenstwa' }
+    { value: 'INFORMATION', label: 'Informacyjne' }
   ];
 
   ngOnInit() {

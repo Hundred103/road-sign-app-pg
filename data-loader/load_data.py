@@ -15,8 +15,8 @@ def upsert_question(question):
         "points": question.get("points", 1),
         "answers": [
             {
-                "id": ans["id"],
                 "answerText": ans["text"],
+                "imageUrl": ans.get("imageUrl"),
                 "correct": ans["correct"]
             } for ans in question["answers"]
         ]

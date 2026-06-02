@@ -14,29 +14,35 @@
     </div>
 
     <div class="quiz-content">
-      <div class="quiz-selector-section" *ngIf="quizzes.length > 1">
+      <div class="quiz-selector-section" *ngIf="quizzes.length > 0">
         <h2 class="section-title">Wybierz quiz</h2>
-        <div class="quiz-selector">
-          <button
-            *ngFor="let quiz of quizzes"
-            type="button"
-            class="quiz-option"
-            [class.active]="selectedQuiz?.id === quiz.id"
-            (click)="selectQuiz(quiz)">
-            <div class="quiz-option-left">
-              <span class="quiz-icon"></span>
-              <div class="quiz-option-text">
-                <span class="quiz-option-title">{{ quiz.title }}</span>
-                <span class="quiz-option-meta">{{ quiz.questionCount }} pytań</span>
+
+        <div class="quiz-group" *ngFor="let group of quizGroups">
+          <h3 class="quiz-group-title">{{ group.label }}</h3>
+          <div class="quiz-selector">
+            <button
+              *ngFor="let quiz of group.quizzes"
+              type="button"
+              class="quiz-option"
+              [class.active]="selectedQuiz?.id === quiz.id"
+              (click)="selectQuiz(quiz)">
+              <div class="quiz-option-left">
+                <div class="quiz-icon" *ngIf="getQuizImageUrl(quiz) as quizImageUrl">
+                  <img [src]="quizImageUrl" [alt]="quiz.title">
+                </div>
+                <div class="quiz-option-text">
+                  <span class="quiz-option-title">{{ quiz.title }}</span>
+                  <span class="quiz-option-meta">#{{ quiz.id }} • {{ quiz.questionCount }} pytań</span>
+                </div>
               </div>
-            </div>
-            <div class="quiz-option-right" *ngIf="quiz.bestScore != null">
-              <div class="best-score">
-                <span class="score-value">{{ quiz.bestPercentage | number:'1.0-0' }}%</span>
-                <span class="score-label">najlepszy</span>
+              <div class="quiz-option-right" *ngIf="quiz.bestScore != null">
+                <div class="best-score">
+                  <span class="score-value">{{ quiz.bestPercentage | number:'1.0-0' }}%</span>
+                  <span class="score-label">najlepszy</span>
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -100,13 +106,19 @@
         <button 
           *ngFor="let answer of currentQuestion.answers; let i = index"
           class="answer-btn"
+          [class.has-image]="!!answer.imageUrl"
           [class.selected]="selectedAnswerIndex === i"
           [class.correct]="showResult && answer.correct"
           [class.incorrect]="showResult && selectedAnswerIndex === i && !answer.correct"
           [disabled]="showResult"
           (click)="selectAnswer(i)">
           <span class="answer-letter">{{ getLetterForIndex(i) }}</span>
-          <span class="answer-text">{{ answer.text }}</span>
+          <div class="answer-content">
+            <div *ngIf="answer.imageUrl" class="answer-image">
+              <img [src]="answer.imageUrl" [alt]="answer.text">
+            </div>
+            <span class="answer-text">{{ answer.text }}</span>
+          </div>
           <span class="answer-icon" *ngIf="showResult && answer.correct">✓</span>
           <span class="answer-icon" *ngIf="showResult && selectedAnswerIndex === i && !answer.correct">✗</span>
         </button>
@@ -154,7 +166,7 @@
       <div class="result-actions">
         <button class="btn btn-primary" (click)="restartQuiz()">Spróbuj ponownie</button>
         <button class="btn btn-secondary" (click)="toggleRanking()">🏆 {{ rankingVisible ? 'Ukryj ranking' : 'Pokaż ranking' }}</button>
-        <button class="btn btn-outline" routerLink="/quiz">← Powrót do quizów</button>
+        <button class="btn btn-outline" type="button" (click)="exitQuiz()">← Powrót do quizów</button>
       </div>
 
       <div *ngIf="rankingSaved === true" class="saved-notice success">
