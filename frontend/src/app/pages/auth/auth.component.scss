@@ -87,3 +87,56 @@ button[disabled] {
   text-decoration: none;
   font-weight: 600;
 }
+
+@media (prefers-color-scheme: dark) {
+  .auth-card {
+    background: #2f3544;
+    border: 1px solid rgba(100, 116, 139, 0.45);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+    color: #e2e8f0;
+  }
+
+  h1 {
+    color: #f8fafc;
+  }
+
+  label {
+    color: #dbe4f0;
+  }
+
+  .mode-btn {
+    border-color: rgba(148, 163, 184, 0.4);
+    background: #3a4255;
+    color: #dbe4f0;
+  }
+
+  .mode-btn.active {
+    border-color: #66bb6a;
+    background: #2e7d32;
+    color: #f8fafc;
+  }
+
+  input {
+    background: #232938;
+    border-color: rgba(100, 116, 139, 0.55);
+    color: #f1f5f9;
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+
+    &:focus {
+      border-color: #66bb6a;
+      box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2);
+      outline: none;
+    }
+  }
+
+  .error {
+    color: #fda4af;
+  }
+
+  .back-link {
+    color: #93c5fd;
+  }
+}

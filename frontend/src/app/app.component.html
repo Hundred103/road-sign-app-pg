@@ -1,15 +1,41 @@
 <div class="app-container">
   <header class="header">
     <nav class="nav">
-      <a routerLink="/" class="logo">Znaki Drogowe</a>
+      <a routerLink="/" class="logo">
+        <span class="logo-icon"></span>
+        <span>Znaki Drogowe</span>
+      </a>
       <div class="nav-links">
         <a routerLink="/" class="nav-link">Start</a>
         <a routerLink="/course" class="nav-link">Kurs</a>
         <a routerLink="/quiz" class="nav-link">Quiz</a>
-        <a routerLink="/auth" class="nav-link" *ngIf="!(currentUser$ | async)">Zaloguj</a>
-        <button class="nav-link nav-btn" *ngIf="currentUser$ | async as user" (click)="onLogout()">
-          Wyloguj ({{ user.displayName || user.username }})
-        </button>
+        
+        <div class="nav-auth">
+          <a routerLink="/auth" class="nav-link nav-login" *ngIf="!(currentUser$ | async)">Zaloguj</a>
+          
+          <div class="user-menu-wrapper" *ngIf="currentUser$ | async as user" (click)="toggleUserMenu()">
+            <button class="user-menu-btn" type="button">
+              <span class="user-avatar">{{ (user.displayName || user.username | slice:0:1 | uppercase) || 'U' }}</span>
+              <span class="user-name">{{ user.displayName || user.username }}</span>
+              <span class="menu-icon">▼</span>
+            </button>
+            
+            <div class="user-dropdown" [class.open]="userMenuOpen" (click)="$event.stopPropagation()">
+              <div class="dropdown-header">
+                <span class="dropdown-avatar">{{ (user.displayName || user.username | slice:0:1 | uppercase) || 'U' }}</span>
+                <div class="dropdown-info">
+                  <div class="dropdown-name">{{ user.displayName || user.username }}</div>
+                  <div class="dropdown-email" *ngIf="user.email">{{ user.email }}</div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item logout-btn" (click)="onLogout()" type="button">
+                <span class="logout-icon">🚪</span>
+                Wyloguj
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </header>

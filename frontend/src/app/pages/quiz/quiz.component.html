@@ -1,41 +1,96 @@
 <div class="quiz-container">
   <div *ngIf="isLoading" class="loading">
-    <p>Ladowanie pytan...</p>
+    <div class="loading-spinner"></div>
+    <p>Ładowanie pytań...</p>
   </div>
 
   <div *ngIf="!isLoading && !quizStarted && !quizFinished" class="quiz-intro">
-    <h1>{{ selectedQuizTitle }}</h1>
-    <p *ngIf="selectedQuiz?.description">{{ selectedQuiz?.description }}</p>
-    <p *ngIf="!selectedQuiz?.description">Sprawdz swoja wiedze! Odpowiedz na pytania i zobacz ile punktow zdobedziesz.</p>
-
-    <div class="quiz-selector" *ngIf="quizzes.length > 1">
-      <button
-        *ngFor="let quiz of quizzes"
-        type="button"
-        class="quiz-option"
-        [class.active]="selectedQuiz?.id === quiz.id"
-        (click)="selectQuiz(quiz)">
-        <span class="quiz-option-title">{{ quiz.title }}</span>
-        <span class="quiz-option-meta">{{ quiz.questionCount }} pytan</span>
-        <span *ngIf="quiz.bestScore != null" class="quiz-option-best">Najlepszy wynik: {{ quiz.bestScore }}/{{ quiz.bestMax }} ({{ quiz.bestPercentage | number:'1.0-0' }}%)</span>
-      </button>
+    <div class="intro-header">
+      <div class="header-content">
+        <h1>{{ selectedQuizTitle }}</h1>
+        <p class="intro-description" *ngIf="selectedQuiz?.description">{{ selectedQuiz?.description }}</p>
+        <p class="intro-description" *ngIf="!selectedQuiz?.description">Sprawdź swoją wiedzę! Odpowiedz na pytania i zobacz ile punktów zdobędziesz.</p>
+      </div>
     </div>
 
-    <p class="question-count">Liczba pytan: {{ questions.length }}</p>
-    <button class="btn btn-primary start-btn" (click)="startQuiz()" [disabled]="questions.length === 0 || isLoadingQuizzes">
-      Rozpocznij quiz
-    </button>
+    <div class="quiz-content">
+      <div class="quiz-selector-section" *ngIf="quizzes.length > 1">
+        <h2 class="section-title">Wybierz quiz</h2>
+        <div class="quiz-selector">
+          <button
+            *ngFor="let quiz of quizzes"
+            type="button"
+            class="quiz-option"
+            [class.active]="selectedQuiz?.id === quiz.id"
+            (click)="selectQuiz(quiz)">
+            <div class="quiz-option-left">
+              <span class="quiz-icon"></span>
+              <div class="quiz-option-text">
+                <span class="quiz-option-title">{{ quiz.title }}</span>
+                <span class="quiz-option-meta">{{ quiz.questionCount }} pytań</span>
+              </div>
+            </div>
+            <div class="quiz-option-right" *ngIf="quiz.bestScore != null">
+              <div class="best-score">
+                <span class="score-value">{{ quiz.bestPercentage | number:'1.0-0' }}%</span>
+                <span class="score-label">najlepszy</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn btn-primary start-btn" (click)="startQuiz()" [disabled]="questions.length === 0 || isLoadingQuizzes">
+          🚀 Rozpocznij quiz
+        </button>
+        <button class="btn btn-secondary" (click)="toggleRanking()">
+          🏆 {{ rankingVisible ? 'Ukryj ranking' : 'Pokaż ranking' }}
+        </button>
+      </div>
+
+      <div *ngIf="rankingVisible" class="ranking-section">
+        <h2 class="section-title">Ranking dla {{ selectedQuizTitle }}</h2>
+        <div *ngIf="rankingList.length === 0" class="no-records">
+          <span class="no-records-icon">📭</span>
+          <p>Brak wyników dla tego quizu</p>
+        </div>
+        <div *ngIf="rankingList.length > 0" class="ranking-table">
+          <div class="ranking-header">
+            <span class="rank-pos">Lp.</span>
+            <span class="rank-name">Gracz</span>
+            <span class="rank-score">Wynik</span>
+            <span class="rank-percent">Procent</span>
+          </div>
+          <div *ngFor="let r of rankingList; let i = index" class="ranking-row" [class.highlight]="r.userId === currentUserId">
+            <span class="rank-pos">{{ i + 1 }}</span>
+            <span class="rank-name">{{ r.displayName || r.username }}</span>
+            <span class="rank-score">{{ r.bestScore }}/{{ selectedQuiz?.questionCount }}</span>
+            <span class="rank-percent">{{ r.bestPercentage | number:'1.0-0' }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
   <div *ngIf="!isLoading && quizStarted && !quizFinished" class="quiz-question">
-    <div class="progress-bar">
-      <div class="progress" [style.width.%]="(currentQuestionIndex + 1) / questions.length * 100"></div>
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="(currentQuestionIndex + 1) / questions.length * 100"></div>
+      </div>
+      <p class="progress-text">Pytanie {{ currentQuestionIndex + 1 }} z {{ questions.length }}</p>
     </div>
-    <p class="selected-quiz-name">{{ selectedQuizTitle }}</p>
-    <p class="question-counter">Pytanie {{ currentQuestionIndex + 1 }} z {{ questions.length }}</p>
+
+    <div class="quiz-header">
+      <div class="header-left">
+        <h2 class="quiz-title">{{ selectedQuizTitle }}</h2>
+      </div>
+      <button class="btn btn-outline exit-btn" (click)="exitQuiz()">✕ Wyjdź</button>
+    </div>
     
     <div class="question-card">
-      <h2>{{ currentQuestion.question }}</h2>
+      <div class="question-number">Pytanie {{ currentQuestionIndex + 1 }}</div>
+      <h2 class="question-text">{{ currentQuestion.question }}</h2>
       
       <div *ngIf="currentQuestion.imageUrl" class="question-image">
         <img [src]="currentQuestion.imageUrl" alt="Znak drogowy">
@@ -50,19 +105,23 @@
           [class.incorrect]="showResult && selectedAnswerIndex === i && !answer.correct"
           [disabled]="showResult"
           (click)="selectAnswer(i)">
-          {{ getLetterForIndex(i) }}. {{ answer.text }}
+          <span class="answer-letter">{{ getLetterForIndex(i) }}</span>
+          <span class="answer-text">{{ answer.text }}</span>
+          <span class="answer-icon" *ngIf="showResult && answer.correct">✓</span>
+          <span class="answer-icon" *ngIf="showResult && selectedAnswerIndex === i && !answer.correct">✗</span>
         </button>
       </div>
       
-      <div *ngIf="showResult" class="result-feedback">
+      <div *ngIf="showResult" class="result-feedback" [class.correct]="isCorrect">
+        <div class="feedback-icon">{{ isCorrect ? '🎉' : '😕' }}</div>
         <div *ngIf="isCorrect" class="correct-feedback">
-          Brawo! Poprawna odpowiedz!
+          Brawo! Poprawna odpowiedź!
         </div>
         <div *ngIf="!isCorrect" class="incorrect-feedback">
-          Niestety, to nie jest poprawna odpowiedz.
+          Niestety, to nie jest poprawna odpowiedź.
         </div>
-        <button class="btn btn-secondary" (click)="nextQuestion()">
-          {{ isLastQuestion ? 'Zobacz wynik' : 'Nastepne pytanie' }}
+        <button class="btn btn-secondary feedback-btn" (click)="nextQuestion()">
+          {{ isLastQuestion ? 'Pokaż wynik' : 'Następne pytanie' }} →
         </button>
       </div>
     </div>
@@ -70,15 +129,63 @@
   
   <div *ngIf="quizFinished" class="quiz-result">
     <div class="result-card">
-      <h1>{{ selectedQuizTitle }} zakonczony!</h1>
-      <div class="score-display">
-        <span class="score">{{ score }}</span>
-        <span class="max-score">/ {{ questions.length }}</span>
+      <div class="result-header">
+        <h1>🎊 Quiz ukończony!</h1>
+        <p>{{ selectedQuizTitle }}</p>
       </div>
-        <p *ngIf="selectedQuiz?.bestScore != null" class="best-display">Twoj najlepszy wynik: {{ selectedQuiz?.bestScore }}/{{ selectedQuiz?.bestMax }} ({{ selectedQuiz?.bestPercentage | number:'1.0-0' }}%)</p>
+
+      <div class="score-container">
+        <div class="score-display">
+          <span class="score">{{ score }}</span>
+          <span class="max-score">/ {{ questions.length }}</span>
+        </div>
+        <div class="score-percentage">
+          <div class="percentage-circle">
+            <span>{{ (score / questions.length * 100) | number:'1.0-0' }}%</span>
+          </div>
+        </div>
+      </div>
+
       <p class="score-message">{{ getScoreMessage() }}</p>
+      <p *ngIf="selectedQuiz?.bestScore != null" class="best-display">
+        Twój najlepszy wynik: {{ selectedQuiz?.bestScore }}/{{ selectedQuiz?.bestMax }} ({{ selectedQuiz?.bestPercentage | number:'1.0-0' }}%)
+      </p>
+
       <div class="result-actions">
-        <button class="btn btn-primary" (click)="restartQuiz()">Sprobuj ponownie</button>
+        <button class="btn btn-primary" (click)="restartQuiz()">Spróbuj ponownie</button>
+        <button class="btn btn-secondary" (click)="toggleRanking()">🏆 {{ rankingVisible ? 'Ukryj ranking' : 'Pokaż ranking' }}</button>
+        <button class="btn btn-outline" routerLink="/quiz">← Powrót do quizów</button>
+      </div>
+
+      <div *ngIf="rankingSaved === true" class="saved-notice success">
+        <span class="notice-icon">✓</span>
+        <span>Twój wynik został zapisany w rankingu!</span>
+      </div>
+      <div *ngIf="rankingSaved === false" class="saved-notice error">
+        <span class="notice-icon">✗</span>
+        <span>Wynik nie został zapisany: {{ rankingSaveReason }}</span>
+      </div>
+
+      <div *ngIf="rankingVisible" class="ranking-section final-ranking">
+        <h2 class="section-title">Ranking dla {{ selectedQuizTitle }}</h2>
+        <div *ngIf="rankingList.length === 0" class="no-records">
+          <span class="no-records-icon">📭</span>
+          <p>Brak wyników dla tego quizu</p>
+        </div>
+        <div *ngIf="rankingList.length > 0" class="ranking-table">
+          <div class="ranking-header">
+            <span class="rank-pos">Lp.</span>
+            <span class="rank-name">Gracz</span>
+            <span class="rank-score">Wynik</span>
+            <span class="rank-percent">Procent</span>
+          </div>
+          <div *ngFor="let r of rankingList; let i = index" class="ranking-row" [class.highlight]="r.userId === currentUserId">
+            <span class="rank-pos">{{ i + 1 }}</span>
+            <span class="rank-name">{{ r.displayName || r.username }}</span>
+            <span class="rank-score">{{ r.bestScore }}/{{ selectedQuiz?.questionCount }}</span>
+            <span class="rank-percent">{{ r.bestPercentage | number:'1.0-0' }}%</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

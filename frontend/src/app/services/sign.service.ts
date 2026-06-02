@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, catchError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 export interface RoadSign {
@@ -47,18 +47,12 @@ export class SignService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Get all road signs - tries API first, falls back to local JSON
-   */
   getAllSigns(): Observable<RoadSign[]> {
     return this.http.get<RoadSign[]>(this.apiUrl).pipe(
       catchError(() => this.getSignsFromJson())
     );
   }
 
-  /**
-   * Load signs from local JSON file (assets/data/road-signs.json)
-   */
   getSignsFromJson(): Observable<RoadSign[]> {
     return this.http.get<{ signs: RoadSign[] }>('/assets/data/road-signs.json').pipe(
       map((data: { signs: RoadSign[] }) => data.signs),
@@ -66,9 +60,6 @@ export class SignService {
     );
   }
 
-  /**
-   * Get quiz questions - tries API first, falls back to local JSON
-   */
   getQuizQuestions(): Observable<QuizQuestion[]> {
     const apiUrl = `${environment.apiUrl}/quiz`;
     return this.http.get<QuizQuestion[]>(apiUrl).pipe(
@@ -97,13 +88,47 @@ export class SignService {
     return this.http.post(url, payload, { withCredentials: true });
   }
 
+  getRankingForQuiz(quizId: number, limit?: number): Observable<{ top: any[] }> {
+    let url = `${environment.apiUrl}/users/rankings/${quizId}`;
+    if (limit != null) url += `?limit=${limit}`;
+    return this.http.get<{ top: any[] }>(url, { withCredentials: true }).pipe(
+      catchError(() => of({ top: [] }))
+    );
+  }
+
+  saveRanking(quizId: number, score: number, maxScore: number, userId?: number): Observable<{ saved: boolean; reason?: string }> {
+    const payload = { quizId, score, maxScore };
+    let url = `${environment.apiUrl}/users/rankings`;
+    const headerObj: { [key: string]: string } = {};
+    
+    // Add user ID to both header and query param if provided
+    if (userId != null) {
+      headerObj['X-User-ID'] = userId.toString();
+      url += `?userId=${userId}`;
+      console.log('[DEBUG] saveRanking - sending userId:', userId);
+    } else {
+      console.log('[DEBUG] saveRanking - no userId provided, relying on session cookie');
+    }
+    
+    const headers = new HttpHeaders(headerObj);
+    
+    return this.http.post<{ saved: boolean; reason?: string }>(
+      url, 
+      payload, 
+      { withCredentials: true, headers }
+    ).pipe(
+      tap(response => console.log('[DEBUG] saveRanking response:', response)),
+      catchError(err => {
+        console.error('[DEBUG] saveRanking error:', err);
+        return of({ saved: false, reason: 'Blad sieci' });
+      })
+    );
+  }
+
   getQuizQuestionsForQuiz(quizId: number): Observable<QuizQuestion[]> {
     return this.http.get<QuizQuestion[]>(`${environment.apiUrl}/quiz/quizzes/${quizId}/questions`);
   }
 
-  /**
-   * Load quiz questions from local JSON file (assets/data/quiz-questions.json)
-   */
   getQuizQuestionsFromJson(): Observable<QuizQuestion[]> {
     return this.http.get<{ questions: QuizQuestion[] }>('/assets/data/quiz-questions.json').pipe(
       map((data: { questions: QuizQuestion[] }) => data.questions),

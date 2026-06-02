@@ -1,12 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { SignService, QuizDefinition, QuizQuestion } from '../../services/sign.service';
 import { AuthService, AuthUser } from '../../services/auth.service';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.scss'
 })
@@ -14,7 +15,11 @@ export class QuizComponent implements OnInit {
   private signService = inject(SignService);
   private authService = inject(AuthService);
 
-  private currentUserId: number | null = null;
+  currentUserId: number | null = null;
+  rankingVisible = false;
+  rankingList: any[] = [];
+  rankingSaved: boolean | null = null;
+  rankingSaveReason: string | null = null;
 
   quizzes: QuizDefinition[] = [];
   selectedQuiz: QuizDefinition | null = null;
@@ -99,6 +104,7 @@ export class QuizComponent implements OnInit {
     }
 
     this.selectedQuiz = quiz;
+    this.rankingVisible = false;
     this.loadQuestionsForQuiz(quiz.id);
   }
 
@@ -164,6 +170,7 @@ export class QuizComponent implements OnInit {
     if (this.isLastQuestion) {
       this.quizFinished = true;
       this.quizStarted = false;
+      this.rankingVisible = true;
       // submit result to backend (will update best if higher)
         if (this.selectedQuiz) {
         this.signService.submitQuizResult(this.selectedQuiz.id, this.score, this.questions.length, this.currentUserId ?? undefined).subscribe({
@@ -177,6 +184,15 @@ export class QuizComponent implements OnInit {
                 this.selectedQuiz!.bestAchievedAt = res.achievedAt;
               }
             });
+            // try to save ranking (user-service)
+            this.signService.saveRanking(this.selectedQuiz!.id, this.score, this.questions.length, this.currentUserId ?? undefined).subscribe((r: any) => {
+              this.rankingSaved = !!r?.saved;
+              this.rankingSaveReason = r?.reason ?? 'Blad przy zapisie wyniku';
+              // refresh ranking to show latest result
+              this.signService.getRankingForQuiz(this.selectedQuiz!.id, 10).subscribe((res) => {
+                this.rankingList = res.top ?? [];
+              });
+            });
           }
         });
       }
@@ -187,8 +203,28 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  toggleRanking() {
+    this.rankingVisible = !this.rankingVisible;
+    if (this.rankingVisible && this.selectedQuiz) {
+      this.signService.getRankingForQuiz(this.selectedQuiz.id, 10).subscribe((res) => {
+        this.rankingList = res.top ?? [];
+      });
+    }
+  }
+
   restartQuiz() {
+    this.rankingVisible = false;
     this.startQuiz();
+  }
+
+  exitQuiz() {
+    this.quizStarted = false;
+    this.quizFinished = false;
+    this.rankingVisible = false;
+    this.currentQuestionIndex = 0;
+    this.selectedAnswerIndex = null;
+    this.showResult = false;
+    this.score = 0;
   }
 
   getLetterForIndex(index: number): string {

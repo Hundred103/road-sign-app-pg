@@ -115,3 +115,36 @@
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .feature-card {
+    background: #2f3544;
+    border: 1px solid rgba(76, 175, 80, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    h2 {
+      color: #f1f5f9;
+    }
+
+    p {
+      color: #cbd5e1;
+    }
+
+    &:hover {
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  .info-section {
+    background: rgba(47, 53, 68, 0.95);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+
+    h3 {
+      color: #f1f5f9;
+    }
+
+    ul li {
+      color: #d5deea;
+    }
+  }
+}
