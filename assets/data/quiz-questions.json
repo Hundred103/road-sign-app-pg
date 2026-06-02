@@ -1,15 +1,16 @@
 {
   "quizzes": [
     {
-      "code": "road-signs-basics",
-      "title": "Znaki drogowe - podstawy",
-      "description": "Obecny quiz z podstawowymi pytaniami o znaki drogowe.",
+      "code": "road-signs-beginner",
+      "title": "Znaki drogowe - Początkujący",
+      "description": "Łatwy quiz dla początkujących z podstawowymi znakami drogowymi.",
+      "difficulty": "EASY",
       "defaultQuiz": true,
       "questions": [
         {
           "id": 1,
-          "question": "Co oznacza znak B-1 (czerwone kolo z bialym srodkiem)?",
-          "imageUrl": null,
+          "question": "Co oznacza znak B-1?",
+          "imageUrl": "assets/signs/prohibition/b1.png",
           "answers": [
             { "text": "Zakaz ruchu w obu kierunkach", "correct": true },
             { "text": "Zakaz wjazdu", "correct": false },
@@ -19,225 +20,927 @@
         },
         {
           "id": 2,
-          "question": "Trojkatny znak z czerwona obwodka i symbolem krowy oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-18a?",
+          "imageUrl": "assets/signs/warning/a18a.png",
           "answers": [
-            { "text": "Gospodarstwo rolne w poblizu", "correct": false },
-            { "text": "Zwierzeta gospodarskie moga pojawic sie na drodze", "correct": true },
-            { "text": "Zakaz wjazdu dla zwierzat", "correct": false },
-            { "text": "Ferma zwierzat", "correct": false }
+            { "text": "Zakaz wjazdu dla zwierząt", "correct": false },
+            { "text": "Zwierzęta gospodarskie mogą pojawić się na drodze", "correct": true },
+            { "text": "Gospodarstwo rolne w pobliżu", "correct": false },
+            { "text": "Ferma zwierząt obok drogi", "correct": false }
           ]
         },
-        {
+      {
           "id": 3,
-          "question": "Niebieski okragly znak z biala strzalka w prawo oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak C-1?",
+          "imageUrl": "assets/signs/mandatory/c1.png",
           "answers": [
             { "text": "Zalecany kierunek jazdy", "correct": false },
             { "text": "Nakaz jazdy w prawo", "correct": true },
-            { "text": "Informacja o skrecie", "correct": false },
+            { "text": "Informacja o skręcie", "correct": false },
             { "text": "Parking po prawej stronie", "correct": false }
           ]
         },
         {
           "id": 4,
-          "question": "Znak STOP wymaga:",
-          "imageUrl": null,
+          "question": "Jaki znak wymaga zatrzymania pojazdu?",
+          "imageUrl": "assets/signs/prohibition/b20.png",
           "answers": [
-            { "text": "Zmniejszenia predkosci", "correct": false },
-            { "text": "Zatrzymania pojazdu", "correct": true },
-            { "text": "Ustapienia pierwszenstwa bez zatrzymywania", "correct": false },
-            { "text": "Zwiekszenia ostroznosci", "correct": false }
+            { "text": "Zmniejszenie prędkości", "correct": false },
+            { "text": "Zatrzymanie pojazdu (STOP)", "correct": true },
+            { "text": "Ustąpienie pierwszeństwa bez zatrzymania", "correct": false },
+            { "text": "Zwiększenie ostrożności", "correct": false }
           ]
         },
         {
           "id": 5,
-          "question": "Znak z przekreslonym telefonem oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-1?",
+          "imageUrl": "assets/signs/warning/a1.png",
           "answers": [
-            { "text": "Telefon awaryjny w poblizu", "correct": false },
-            { "text": "Brak zasiegu sieci", "correct": false },
-            { "text": "Zakaz uzywania telefonow", "correct": true },
-            { "text": "Koniec strefy WiFi", "correct": false }
-          ]
-        },
-        {
-          "id": 6,
-          "question": "Co oznacza znak A-1 (trojkat z zakrecona strzalka w prawo)?",
-          "imageUrl": null,
-          "answers": [
-            { "text": "Skret w prawo", "correct": false },
-            { "text": "Niebezpieczny zakret w prawo", "correct": true },
-            { "text": "Nakaz skretu w prawo", "correct": false },
+            { "text": "Skręt w prawo", "correct": false },
+            { "text": "Niebezpieczny zakręt w prawo", "correct": true },
+            { "text": "Nakaz skrętu w prawo", "correct": false },
             { "text": "Objazd w prawo", "correct": false }
           ]
         },
         {
-          "id": 7,
-          "question": "Znak D-6 (niebieski kwadrat z biala zebra) oznacza:",
-          "imageUrl": null,
+          "id": 6,
+          "question": "Co oznacza znak D-6?",
+          "imageUrl": "assets/signs/information/d6.png",
           "answers": [
-            { "text": "Przejscie dla pieszych", "correct": true },
+            { "text": "Przejście dla pieszych", "correct": true },
             { "text": "Zakaz przechodzenia", "correct": false },
-            { "text": "Sciezka dla pieszych", "correct": false },
+            { "text": "Ścieżka dla pieszych", "correct": false },
             { "text": "Strefa piesza", "correct": false }
           ]
         },
         {
-          "id": 8,
-          "question": "Znak ograniczenia predkosci do 50 km/h oznacza:",
-          "imageUrl": null,
+          "id": 7,
+          "question": "Co oznacza znak B-33?",
+          "imageUrl": "assets/signs/prohibition/b33.png",
           "answers": [
-            { "text": "Zalecana predkosc 50 km/h", "correct": false },
-            { "text": "Minimalna predkosc 50 km/h", "correct": false },
-            { "text": "Maksymalna dozwolona predkosc 50 km/h", "correct": true },
-            { "text": "Srednia predkosc na odcinku", "correct": false }
+            { "text": "Zalecana prędkość", "correct": false },
+            { "text": "Minimalna prędkość", "correct": false },
+            { "text": "Maksymalna dozwolona prędkość", "correct": true },
+            { "text": "Średnia prędkość na odcinku", "correct": false }
+          ]
+        },
+        {
+          "id": 8,
+          "question": "Co oznacza znak C-13?",
+          "imageUrl": "assets/signs/mandatory/c13.png",
+          "answers": [
+            { "text": "Zakaz wjazdu rowerów", "correct": false },
+            { "text": "Droga dla rowerów", "correct": true },
+            { "text": "Wypożyczalnia rowerów", "correct": false },
+            { "text": "Parking dla rowerów", "correct": false }
           ]
         },
         {
           "id": 9,
-          "question": "Znak C-13 (niebieski okrag z rowerem) oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-17?",
+          "imageUrl": "assets/signs/warning/a17.png",
           "answers": [
-            { "text": "Zakaz wjazdu rowerow", "correct": false },
-            { "text": "Droga dla rowerow", "correct": true },
-            { "text": "Wypozyczalnia rowerow", "correct": false },
-            { "text": "Parking dla rowerow", "correct": false }
+            { "text": "Szkoła w pobliżu", "correct": false },
+            { "text": "Plac zabaw", "correct": false },
+            { "text": "Możliwość pojawienia się dzieci na drodze", "correct": true },
+            { "text": "Przedszkole", "correct": false }
           ]
         },
         {
           "id": 10,
-          "question": "Znak A-17 (trojkat z dziecmi) ostrzega przed:",
-          "imageUrl": null,
+          "question": "Co oznacza znak D-18?",
+          "imageUrl": "assets/signs/information/d18.png",
           "answers": [
-            { "text": "Szkola w poblizu", "correct": false },
-            { "text": "Plac zabaw", "correct": false },
-            { "text": "Dzieci na drodze", "correct": true },
-            { "text": "Przedszkolem", "correct": false }
+            { "text": "Zakaz zatrzymywania", "correct": false },
+            { "text": "Miejsce przeznaczone do parkowania", "correct": true },
+            { "text": "Strefa piesza", "correct": false },
+            { "text": "Przystanek tramwajowy", "correct": false }
           ]
         }
       ]
     },
     {
-      "code": "road-signs-warning-focus",
-      "title": "Znaki ostrzegawcze",
-      "description": "Krotki quiz skupiony na znakach ostrzegawczych.",
+      "code": "road-signs-intermediate",
+      "title": "Znaki drogowe - Średniozaawansowany",
+      "description": "Quiz na poziomie średnim z bardziej skomplikowanymi znakami.",
+      "difficulty": "MEDIUM",
       "questions": [
         {
           "id": 11,
-          "question": "Znak ostrzegawczy z symbolem jelenia oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-18b?",
+          "imageUrl": "assets/signs/warning/a18b.png",
           "answers": [
-            { "text": "Miejsce postoju dzikich zwierzat", "correct": false },
-            { "text": "Mozliwe przejscie zwierzat przez droge", "correct": true },
+            { "text": "Miejsce postoju zwierząt domowych", "correct": false },
+            { "text": "Możliwość pojawiania się zwierząt dziko żyjących", "correct": true },
             { "text": "Zakaz wjazdu do lasu", "correct": false },
-            { "text": "Strefa przyrodnicza", "correct": false }
+            { "text": "Strefa przyrodnicza zagrożona", "correct": false }
           ]
         },
         {
           "id": 12,
-          "question": "Trójkatny znak z symbolem fal oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-6c?",
+          "imageUrl": "assets/signs/warning/a6c.png",
           "answers": [
-            { "text": "Mokra nawierzchnia", "correct": true },
-            { "text": "Parking nad woda", "correct": false },
-            { "text": "Sliska droga tylko zimą", "correct": false },
+            { "text": "Mokra nawierzchnia", "correct": false },
+            { "text": "Niebezpieczeństwo ślizgu pojazdów", "correct": true },
+            { "text": "Śliska droga tylko zimą", "correct": false },
             { "text": "Most w budowie", "correct": false }
           ]
         },
         {
           "id": 13,
-          "question": "Znak ostrzegawczy z serią zakretow oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-23?",
+          "imageUrl": "assets/signs/warning/a23.png",
           "answers": [
-            { "text": "Serpentine road / wiele zakretow", "correct": true },
-            { "text": "Objazd miasta", "correct": false },
+            { "text": "Droga się rozszerza", "correct": false },
+            { "text": "Droga się zwęża", "correct": true },
             { "text": "Zakaz zawracania", "correct": false },
             { "text": "Droga jednokierunkowa", "correct": false }
           ]
         },
         {
           "id": 14,
-          "question": "Trojkat z symbolem wykrzyknika ostrzega o:",
-          "imageUrl": null,
+          "question": "Co oznacza znak B-16?",
+          "imageUrl": "assets/signs/prohibition/b16.png",
           "answers": [
-            { "text": "Ogólnym niebezpieczenstwie", "correct": true },
-            { "text": "Zakazie ruchu", "correct": false },
-            { "text": "Stacji benzynowej", "correct": false },
-            { "text": "Przebudowie drogi", "correct": false }
+            { "text": "Można parkować krótko", "correct": false },
+            { "text": "Nie wolno zatrzymywać pojazdu", "correct": true },
+            { "text": "Strefa ograniczonego parkowania", "correct": false },
+            { "text": "Zakaz wjazdu", "correct": false }
           ]
         },
         {
           "id": 15,
-          "question": "Znak ostrzegawczy z rowerem i dzieckiem oznacza:",
-          "imageUrl": null,
+          "question": "Co oznacza znak A-20?",
+          "imageUrl": "assets/signs/warning/a20.png",
           "answers": [
-            { "text": "Sciezke rowerowa", "correct": false },
-            { "text": "Mozliwa obecnosci dzieci lub pieszych", "correct": true },
-            { "text": "Zakaz jazdy rowerem", "correct": false },
-            { "text": "Miejsce nauki jazdy", "correct": false }
+            { "text": "Koniec tunelu", "correct": false },
+            { "text": "Zbliżający się tunel", "correct": true },
+            { "text": "Wytłumaczenie tunelu na mapie", "correct": false },
+            { "text": "Tunel bez oświetlenia", "correct": false }
+          ]
+        },
+        {
+          "id": 16,
+          "question": "Co oznacza znak B-21?",
+          "imageUrl": "assets/signs/prohibition/b21.png",
+          "answers": [
+            { "text": "Można zatrzymać się na chwilę", "correct": false },
+            { "text": "Nie wolno parkować pojazdu", "correct": true },
+            { "text": "Strefa ograniczonego czasu postoju", "correct": false },
+            { "text": "Parking w budowie", "correct": false }
+          ]
+        },
+        {
+          "id": 17,
+          "question": "Co oznacza znak C-12?",
+          "imageUrl": "assets/signs/mandatory/c12.png",
+          "answers": [
+            { "text": "Zalecane kierunki jazdy", "correct": false },
+            { "text": "Nakaz jazdy na rondzie zgodnie ze strzałkami", "correct": true },
+            { "text": "Informacja o rondzie", "correct": false },
+            { "text": "Jesteś na rondzie", "correct": false }
+          ]
+        },
+        {
+          "id": 18,
+          "question": "Co oznacza znak D-1?",
+          "imageUrl": "assets/signs/information/d1.png",
+          "answers": [
+            { "text": "Droga boczna", "correct": false },
+            { "text": "Droga z pierwszeństwem przejazdu", "correct": true },
+            { "text": "Droga jednokierunkowa", "correct": false },
+            { "text": "Główna ulica miasta", "correct": false }
+          ]
+        },
+        {
+          "id": 19,
+          "question": "Co oznacza znak A-16?",
+          "imageUrl": "assets/signs/warning/a16.png",
+          "answers": [
+            { "text": "Jesteś na rondzie", "correct": false },
+            { "text": "Ostrzega o zbliżającym się rondzie", "correct": true },
+            { "text": "Nakaz jazdy na rondzie", "correct": false },
+            { "text": "Koniec ronda", "correct": false }
+          ]
+        },
+        {
+          "id": 20,
+          "question": "Co oznacza znak B-25?",
+          "imageUrl": "assets/signs/prohibition/b25.png",
+          "answers": [
+            { "text": "Ograniczenie dla ciężarówek powyżej 10 ton", "correct": false },
+            { "text": "Pojazdy ciężarowe nie mogą tu jeździć", "correct": true },
+            { "text": "Droga dla lekkich pojazdów", "correct": false },
+            { "text": "Parking dla ciężarówek", "correct": false }
           ]
         }
       ]
     },
     {
-      "code": "road-signs-city-mix",
-      "title": "Mieszanina miejska",
-      "description": "Mieszany quiz o jezdzie w miescie i podstawowych znakach.",
+      "code": "road-signs-advanced",
+      "title": "Znaki drogowe - Zaawansowany",
+      "description": "Quiz dla zaawansowanych z trudnymi znakami i wariantami.",
+      "difficulty": "HARD",
       "questions": [
         {
-          "id": 16,
-          "question": "Znak z niebieskim tlem i biala strzalka w lewo oznacza:",
+          "id": 21,
+          "question": "Jaka jest różnica między znakami A-1 i A-2?",
           "imageUrl": null,
           "answers": [
-            { "text": "Nakaz jazdy w lewo", "correct": true },
-            { "text": "Zakaz skrętu w lewo", "correct": false },
-            { "text": "Droga jednokierunkowa w prawo", "correct": false },
-            { "text": "Sugerowany objazd", "correct": false }
+            { "text": "A-1 ostrzega przed zakrętem w prawo, A-2 w lewo", "correct": true },
+            { "text": "Oba oznaczają to samo", "correct": false },
+            { "text": "A-1 jest na drogach szybkich, A-2 w miastach", "correct": false },
+            { "text": "A-1 dotyczy pieszych, A-2 pojazdów", "correct": false }
           ]
         },
         {
-          "id": 17,
-          "question": "Znak z napisem ustap pierwszenstwa oznacza, ze kierowca powinien:",
-          "imageUrl": null,
+          "id": 22,
+          "question": "Co oznacza znak A-14?",
+          "imageUrl": "assets/signs/warning/a14.png",
           "answers": [
-            { "text": "Jechac bez zatrzymywania", "correct": false },
-            { "text": "Ustapic pierwszenstwa innym pojazdom", "correct": true },
-            { "text": "Skrecic tylko w prawo", "correct": false },
-            { "text": "Zwiekszyc predkosc", "correct": false }
+            { "text": "Zimowe warunki mogą być", "correct": false },
+            { "text": "Droga może być oblodzona", "correct": true },
+            { "text": "Parkingi są zablokowane", "correct": false },
+            { "text": "Śnieg będzie czyszczony", "correct": false }
           ]
         },
         {
-          "id": 18,
-          "question": "Znak z symbolem parkingu oznacza:",
-          "imageUrl": null,
+          "id": 23,
+          "question": "Co oznacza znak B-42?",
+          "imageUrl": "assets/signs/prohibition/b42.png",
           "answers": [
-            { "text": "Miejsce postoju pojazdow", "correct": true },
-            { "text": "Zakaz zatrzymywania", "correct": false },
-            { "text": "Strefe piesza", "correct": false },
-            { "text": "Przystanek tramwajowy", "correct": false }
+            { "text": "Klakson jest zepsuty", "correct": false },
+            { "text": "Nie wolno trąbić/używać klaksonu", "correct": true },
+            { "text": "Droga jest pusta", "correct": false },
+            { "text": "Strefa ciszy wyłącznie nocą", "correct": false }
           ]
         },
         {
-          "id": 19,
-          "question": "Znak z litera P i symbolem auta oznacza:",
+          "id": 24,
+          "question": "Jaka jest różnica między C-13 i C-16?",
           "imageUrl": null,
           "answers": [
-            { "text": "Parking", "correct": true },
-            { "text": "Poczta", "correct": false },
-            { "text": "Przejscie dla pieszych", "correct": false },
-            { "text": "Przyspieszenie", "correct": false }
+            { "text": "C-13 dla rowerów, C-16 dla pieszych", "correct": true },
+            { "text": "Oba są dla rowerów", "correct": false },
+            { "text": "C-13 na wsi, C-16 w mieście", "correct": false },
+            { "text": "Oba są dla pieszych", "correct": false }
           ]
         },
         {
-          "id": 20,
-          "question": "Znak informacyjny z symbolem stacji paliw oznacza:",
+          "id": 25,
+          "question": "Co oznacza znak A-6d?",
+          "imageUrl": "assets/signs/warning/a6d.png",
+          "answers": [
+            { "text": "Droga jest w remoncie", "correct": false },
+            { "text": "Nierówna nawierzchnia drogi", "correct": true },
+            { "text": "Wiele dziur w asfalcie", "correct": false },
+            { "text": "Droga jest zniszczona", "correct": false }
+          ]
+        },
+        {
+          "id": 26,
+          "question": "Co oznacza znak D-42?",
+          "imageUrl": "assets/signs/information/d42.png",
+          "answers": [
+            { "text": "Koniec miasta", "correct": false },
+            { "text": "Początek miasta/wsi - ograniczenie do 50 km/h", "correct": true },
+            { "text": "Zakaz wjazdu do miasta", "correct": false },
+            { "text": "Parking przy mieście", "correct": false }
+          ]
+        },
+        {
+          "id": 27,
+          "question": "Co oznacza znak B-3?",
+          "imageUrl": "assets/signs/prohibition/b3.png",
+          "answers": [
+            { "text": "Droga dla samochodów osobowych", "correct": false },
+            { "text": "Pojazdy silnikowe nie mogą tu jeździć", "correct": true },
+            { "text": "Ścieżka dla rowerów i pieszych", "correct": false },
+            { "text": "Strefa rowerowa i piesza", "correct": false }
+          ]
+        },
+        {
+          "id": 28,
+          "question": "Co oznacza znak A-12a?",
+          "imageUrl": "assets/signs/warning/a12a.png",
+          "answers": [
+            { "text": "Pożar w lesie", "correct": false },
+            { "text": "Zagrożenie pożarem lasu w tym terenie", "correct": true },
+            { "text": "Zakaz kempingu", "correct": false },
+            { "text": "Strefa leśna zamknięta", "correct": false }
+          ]
+        },
+        {
+          "id": 29,
+          "question": "Jaka kategoria znaku ma formę prostokąta niebieskiego?",
           "imageUrl": null,
           "answers": [
-            { "text": "Miejsce tankowania paliwa", "correct": true },
-            { "text": "Zakaz postoju", "correct": false },
-            { "text": "Warsztat samochodowy", "correct": false },
-            { "text": "Opłaty drogowe", "correct": false }
+            { "text": "Znaki ostrzegawcze", "correct": false },
+            { "text": "Znaki zakazujące", "correct": false },
+            { "text": "Znaki nakazujące i informacyjne", "correct": true },
+            { "text": "Wszystkie rodzaje", "correct": false }
+          ]
+        },
+        {
+          "id": 30,
+          "question": "Co oznacza znak D-40?",
+          "imageUrl": "assets/signs/information/d40.png",
+          "answers": [
+            { "text": "Koniec miasta", "correct": true },
+            { "text": "Granica powiatu", "correct": false },
+            { "text": "Początek autostrady", "correct": false },
+            { "text": "Droga zamknięta", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "road-signs-warning-only",
+      "title": "Znaki ostrzegawcze",
+      "description": "Quiz skupiony wyłącznie na znakach ostrzegawczych (kategoria A).",
+      "difficulty": "MEDIUM",
+      "questions": [
+        {
+          "id": 31,
+          "question": "Jaki kształt mają znaki ostrzegawcze?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Koło", "correct": false },
+            { "text": "Trójkąt z czerwoną obwódką", "correct": true },
+            { "text": "Prostokąt", "correct": false },
+            { "text": "Sześciokąt", "correct": false }
+          ]
+        },
+        {
+          "id": 32,
+          "question": "Co oznacza znak A-2?",
+          "imageUrl": "assets/signs/warning/a2.png",
+          "answers": [
+            { "text": "Niebezpieczny zakręt w prawo", "correct": false },
+            { "text": "Niebezpieczny zakręt w lewo", "correct": true },
+            { "text": "Ostrzega przed skrzyżowaniem", "correct": false },
+            { "text": "Droga w lewo", "correct": false }
+          ]
+        },
+        {
+          "id": 33,
+          "question": "Co oznacza znak A-7?",
+          "imageUrl": "assets/signs/warning/a7.png",
+          "answers": [
+            { "text": "Nakaz ustąpienia pierwszeństwa", "correct": false },
+            { "text": "Ostrzegawczy przed skrzyżowaniem z priorytetem", "correct": true },
+            { "text": "Stop", "correct": false },
+            { "text": "Koniec ograniczenia prędkości", "correct": false }
+          ]
+        },
+        {
+          "id": 34,
+          "question": "Co oznacza znak A-8?",
+          "imageUrl": "assets/signs/warning/a8.png",
+          "answers": [
+            { "text": "Bariery bezpieczeństwa", "correct": false },
+            { "text": "Odbojnice przy drodze", "correct": true },
+            { "text": "Tablica informacyjna", "correct": false },
+            { "text": "Ścieżka rowerowa", "correct": false }
+          ]
+        },
+        {
+          "id": 35,
+          "question": "Co oznacza znak A-9?",
+          "imageUrl": "assets/signs/warning/a9.png",
+          "answers": [
+            { "text": "Skrzyżowanie znakami zwykłymi", "correct": false },
+            { "text": "Skrzyżowanie z pojazdy bez pierwszeństwa", "correct": true },
+            { "text": "Droga główna", "correct": false },
+            { "text": "Obowiązkowe udzielenie pierwszeństwa", "correct": false }
+          ]
+        },
+        {
+          "id": 36,
+          "question": "Co oznacza znak A-11?",
+          "imageUrl": "assets/signs/warning/a11.png",
+          "answers": [
+            { "text": "Stacja tramwajowa", "correct": false },
+            { "text": "Postój tramwajów na drodze", "correct": true },
+            { "text": "Zakaz przejazdu tramwajów", "correct": false },
+            { "text": "Linia tramwajowa", "correct": false }
+          ]
+        },
+        {
+          "id": 37,
+          "question": "Co oznacza znak A-12c?",
+          "imageUrl": "assets/signs/warning/a12c.png",
+          "answers": [
+            { "text": "Paliwo do sprzedaży", "correct": false },
+            { "text": "Możliwość transportu materiałów niebezpiecznych", "correct": true },
+            { "text": "Zbiornik gazu", "correct": false },
+            { "text": "Droga dla cystern", "correct": false }
+          ]
+        },
+        {
+          "id": 38,
+          "question": "Co oznacza znak A-30?",
+          "imageUrl": "assets/signs/warning/a30.png",
+          "answers": [
+            { "text": "Droga blokada", "correct": false },
+            { "text": "Początek przegrody na drodze", "correct": true },
+            { "text": "Zakaz wjazdu", "correct": false },
+            { "text": "Parking zamknięty", "correct": false }
+          ]
+        },
+        {
+          "id": 39,
+          "question": "Co oznacza znak A-32?",
+          "imageUrl": "assets/signs/warning/a32.png",
+          "answers": [
+            { "text": "Droga dla pojazdów wyjeżdżających", "correct": false },
+            { "text": "Niebezpieczny wyjazd z drogi bocznej", "correct": true },
+            { "text": "Wyjazd z parkingu", "correct": false },
+            { "text": "Droga jednokierunkowa", "correct": false }
+          ]
+        },
+        {
+          "id": 40,
+          "question": "Co oznacza znak A-5?",
+          "imageUrl": "assets/signs/warning/a5.png",
+          "answers": [
+            { "text": "Przystanek autobusów", "correct": false },
+            { "text": "Przejście autobusów przez drogę", "correct": true },
+            { "text": "Zakaz wjazdu dla autobusów", "correct": false },
+            { "text": "Stacja obsługi autobusów", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "road-signs-prohibition-only",
+      "title": "Znaki zakazujące",
+      "description": "Quiz skupiony wyłącznie na znakach zakazujących (kategoria B).",
+      "difficulty": "MEDIUM",
+      "questions": [
+        {
+          "id": 41,
+          "question": "Jaki kształt mają znaki zakazujące?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Trójkąt z czerwoną obwódką", "correct": false },
+            { "text": "Koło z czerwoną obwódką", "correct": true },
+            { "text": "Prostokąt niebieski", "correct": false },
+            { "text": "Sześciokąt żółty", "correct": false }
+          ]
+        },
+        {
+          "id": 42,
+          "question": "Co oznacza znak B-2?",
+          "imageUrl": "assets/signs/prohibition/b2.png",
+          "answers": [
+            { "text": "Zakaz ruchu w obu kierunkach", "correct": false },
+            { "text": "Zakaz wjazdu", "correct": true },
+            { "text": "Zakaz zawracania", "correct": false },
+            { "text": "Droga jednokierunkowa", "correct": false }
+          ]
+        },
+        {
+          "id": 43,
+          "question": "Co oznacza znak B-20?",
+          "imageUrl": "assets/signs/prohibition/b20.png",
+          "answers": [
+            { "text": "Zwolnij i ustąp pierwszeństwa", "correct": false },
+            { "text": "Stop - zatrzymaj się i ustąp pierwszeństwa", "correct": true },
+            { "text": "Zakaz przejazdu", "correct": false },
+            { "text": "Ostrzeżenie przed skrzyżowaniem", "correct": false }
+          ]
+        },
+        {
+          "id": 44,
+          "question": "Co oznacza znak B-23?",
+          "imageUrl": "assets/signs/prohibition/b23.png",
+          "answers": [
+            { "text": "Koniec parkingu", "correct": false },
+            { "text": "Koniec strefy zakazu parkowania", "correct": true },
+            { "text": "Parking w budowie", "correct": false },
+            { "text": "Strefa płatnego parkowania", "correct": false }
+          ]
+        },
+        {
+          "id": 45,
+          "question": "Co oznacza znak B-31?",
+          "imageUrl": "assets/signs/prohibition/b31.png",
+          "answers": [
+            { "text": "Początek ograniczenia prędkości", "correct": false },
+            { "text": "Koniec ograniczenia prędkości", "correct": true },
+            { "text": "Zmiana limitu prędkości", "correct": false },
+            { "text": "Nowy limit prędkości", "correct": false }
+          ]
+        },
+        {
+          "id": 46,
+          "question": "Co oznacza znak B-35?",
+          "imageUrl": "assets/signs/prohibition/b35.png",
+          "answers": [
+            { "text": "Ciężarówki mogą wjechać z drugą drogę", "correct": false },
+            { "text": "Zakaz wjazdu ciężarówek w danym kierunku", "correct": true },
+            { "text": "Ograniczenie dla aut powyżej 3,5 tony", "correct": false },
+            { "text": "Droga dla samochodów osobowych", "correct": false }
+          ]
+        },
+        {
+          "id": 47,
+          "question": "Co oznacza znak B-36?",
+          "imageUrl": "assets/signs/prohibition/b36.png",
+          "answers": [
+            { "text": "Koniec strefy dla ciężarówek", "correct": false },
+            { "text": "Koniec strefy zakazu ruchu ciężarówek", "correct": true },
+            { "text": "Droga dla samochodów ciężkich", "correct": false },
+            { "text": "Parking dla ciężarówek", "correct": false }
+          ]
+        },
+        {
+          "id": 48,
+          "question": "Co oznacza znak B-41?",
+          "imageUrl": "assets/signs/prohibition/b41.png",
+          "answers": [
+            { "text": "Droga dla pieszych", "correct": false },
+            { "text": "Zakaz ruchu pieszych na tej drodze", "correct": true },
+            { "text": "Strefa piesza", "correct": false },
+            { "text": "Chodnik", "correct": false }
+          ]
+        },
+        {
+          "id": 49,
+          "question": "Co oznacza znak B-43?",
+          "imageUrl": "assets/signs/prohibition/b43.png",
+          "answers": [
+            { "text": "Koniec strefy ciszy", "correct": true },
+            { "text": "Początek zakazu trąbienia", "correct": false },
+            { "text": "Strefa spokojnych ulic", "correct": false },
+            { "text": "Droga Hospital niearby", "correct": false }
+          ]
+        },
+        {
+          "id": 50,
+          "question": "Co musi oznaczać liczba na znaku B-33?",
+          "imageUrl": "assets/signs/prohibition/b33.png",
+          "answers": [
+            { "text": "Minimalną prędkość", "correct": false },
+            { "text": "Maksymalną dozwoloną prędkość w km/h", "correct": true },
+            { "text": "Rekomendowaną prędkość", "correct": false },
+            { "text": "Średnią prędkość na trasie", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "road-signs-mandatory-only",
+      "title": "Znaki nakazujące",
+      "description": "Quiz skupiony wyłącznie na znakach nakazujących (kategoria C).",
+      "difficulty": "EASY",
+      "questions": [
+        {
+          "id": 51,
+          "question": "Jaki kształt mają znaki nakazujące?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Trójkąt z czerwoną obwódką", "correct": false },
+            { "text": "Koło z czerwoną obwódką", "correct": false },
+            { "text": "Niebieski okrąg lub prostokąt", "correct": true },
+            { "text": "Sześciokąt", "correct": false }
+          ]
+        },
+        {
+          "id": 52,
+          "question": "Co oznacza znak C-2?",
+          "imageUrl": "assets/signs/mandatory/c2.png",
+          "answers": [
+            { "text": "Nakaz jazdy w prawo za znakiem", "correct": true },
+            { "text": "Nakaz jazdy w prawo przed znakiem", "correct": false },
+            { "text": "Zalecana jazda w prawo", "correct": false },
+            { "text": "Droga w prawo", "correct": false }
+          ]
+        },
+        {
+          "id": 53,
+          "question": "Co oznacza znak C-5?",
+          "imageUrl": "assets/signs/mandatory/c5.png",
+          "answers": [
+            { "text": "Opcjonalny przejazd przez tunel", "correct": false },
+            { "text": "Nakaz przejazdu przez tunel", "correct": true },
+            { "text": "Tunel zamknięty", "correct": false },
+            { "text": "Ostrzeżenie przed tunelem", "correct": false }
+          ]
+        },
+        {
+          "id": 54,
+          "question": "Co oznacza znak C-7?",
+          "imageUrl": "assets/signs/mandatory/c7.png",
+          "answers": [
+            { "text": "Ścieżka rowerowa opcjonalna", "correct": false },
+            { "text": "Nakaz jazdy na ścieżce dla rowerów", "correct": true },
+            { "text": "Obszar rowerowy", "correct": false },
+            { "text": "Parking dla rowerów", "correct": false }
+          ]
+        },
+        {
+          "id": 55,
+          "question": "Co oznacza znak C-8?",
+          "imageUrl": "assets/signs/mandatory/c8.png",
+          "answers": [
+            { "text": "Droga dla rowerów i pieszych razem", "correct": true },
+            { "text": "Droga dla rowerów i pieszych osobno", "correct": false },
+            { "text": "Strefa pieszo-rowerowa", "correct": false },
+            { "text": "Parking dla rowerów i pieszych", "correct": false }
+          ]
+        },
+        {
+          "id": 56,
+          "question": "Co oznacza znak C-9?",
+          "imageUrl": "assets/signs/mandatory/c9.png",
+          "answers": [
+            { "text": "Droga dla wszystkich uczestników", "correct": false },
+            { "text": "Droga dla rowerów i pieszych rozdzielona", "correct": true },
+            { "text": "Droga dla samochodów i rowerów", "correct": false },
+            { "text": "Strefa pieszo-rowerowa wspólna", "correct": false }
+          ]
+        },
+        {
+          "id": 57,
+          "question": "Co oznacza znak C-16?",
+          "imageUrl": "assets/signs/mandatory/c16.png",
+          "answers": [
+            { "text": "Droga dla rowerów", "correct": false },
+            { "text": "Droga przeznaczona tylko dla pieszych", "correct": true },
+            { "text": "Droga dla pojazdów", "correct": false },
+            { "text": "Strefa ruchu pieszych", "correct": false }
+          ]
+        },
+        {
+          "id": 58,
+          "question": "Jakiego kierunku ruchu nakaz oznacza znak C-1?",
+          "imageUrl": "assets/signs/mandatory/c1.png",
+          "answers": [
+            { "text": "Jazdy w lewo", "correct": false },
+            { "text": "Jazdy w prawo", "correct": true },
+            { "text": "Jazdy do przodu", "correct": false },
+            { "text": "Zawracania", "correct": false }
+          ]
+        },
+        {
+          "id": 59,
+          "question": "Co oznacza znak C-13?",
+          "imageUrl": "assets/signs/mandatory/c13.png",
+          "answers": [
+            { "text": "Droga dla pieszych", "correct": false },
+            { "text": "Droga przeznaczona tylko dla rowerów", "correct": true },
+            { "text": "Strefa pieszo-rowerowa", "correct": false },
+            { "text": "Parking dla rowerów", "correct": false }
+          ]
+        },
+        {
+          "id": 60,
+          "question": "Jaki nakaz daje piktogram ze strzałką?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Zalecany kierunek", "correct": false },
+            { "text": "Obowiązkowy kierunek jazdy w danym miejscu", "correct": true },
+            { "text": "Możliwość skrętu", "correct": false },
+            { "text": "Wskazówka dla kierowcy", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "road-signs-information-only",
+      "title": "Znaki informacyjne",
+      "description": "Quiz skupiony wyłącznie na znakach informacyjnych (kategoria D).",
+      "difficulty": "EASY",
+      "questions": [
+        {
+          "id": 61,
+          "question": "Jaki kształt mają znaki informacyjne?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Trójkąt z czerwoną obwódką", "correct": false },
+            { "text": "Koło z czerwoną obwódką", "correct": false },
+            { "text": "Niebieski prostokąt", "correct": true },
+            { "text": "Sześciokąt żółty", "correct": false }
+          ]
+        },
+        {
+          "id": 62,
+          "question": "Co oznacza znak D-2?",
+          "imageUrl": "assets/signs/information/d2.png",
+          "answers": [
+            { "text": "Początek drogi z pierwszeństwem", "correct": false },
+            { "text": "Koniec drogi z pierwszeństwem", "correct": true },
+            { "text": "Droga główna", "correct": false },
+            { "text": "Zmiana ulicy", "correct": false }
+          ]
+        },
+        {
+          "id": 63,
+          "question": "Co oznacza znak D-3?",
+          "imageUrl": "assets/signs/information/d3.png",
+          "answers": [
+            { "text": "Droga dla pieszych jednokierunkowa", "correct": false },
+            { "text": "Droga dla pieszych z możliwością zmiany kierunku", "correct": true },
+            { "text": "Chodnik skrzyżowania się", "correct": false },
+            { "text": "Parking dla pieszych", "correct": false }
+          ]
+        },
+        {
+          "id": 64,
+          "question": "Co oznacza znak D-4a?",
+          "imageUrl": "assets/signs/information/d4a.png",
+          "answers": [
+            { "text": "Koniec strefy rondel", "correct": false },
+            { "text": "Początek strefy obowiązkowego ruchu okrężnego", "correct": true },
+            { "text": "Jedno rondo w przybliżeniu", "correct": false },
+            { "text": "Wymóg jeżdżenia w kółko", "correct": false }
+          ]
+        },
+        {
+          "id": 65,
+          "question": "Co oznacza znak D-5?",
+          "imageUrl": "assets/signs/information/d5.png",
+          "answers": [
+            { "text": "Koniec drogi dla pieszych", "correct": true },
+            { "text": "Początek drogi dla pieszych", "correct": false },
+            { "text": "Chodnik zamknięty", "correct": false },
+            { "text": "Strefa piesza skups się tutaj", "correct": false }
+          ]
+        },
+        {
+          "id": 66,
+          "question": "Co oznacza znak D-7?",
+          "imageUrl": "assets/signs/information/d7.png",
+          "answers": [
+            { "text": "Początek drogi dla rowerów", "correct": false },
+            { "text": "Koniec drogi dla rowerów", "correct": true },
+            { "text": "Parking dla rowerów", "correct": false },
+            { "text": "Obowiązkowa ścieżka rowerowa", "correct": false }
+          ]
+        },
+        {
+          "id": 67,
+          "question": "Co oznacza znak D-9?",
+          "imageUrl": "assets/signs/information/d9.png",
+          "answers": [
+            { "text": "Parking powszechny", "correct": false },
+            { "text": "Parking dla osób niepełnosprawnych", "correct": true },
+            { "text": "Strefa osoby starsze", "correct": false },
+            { "text": "Parking medyczny", "correct": false }
+          ]
+        },
+        {
+          "id": 68,
+          "question": "Co oznacza znak D-13a?",
+          "imageUrl": "assets/signs/information/d13a.png",
+          "answers": [
+            { "text": "Klinika dentystyczna", "correct": false },
+            { "text": "Szpital", "correct": true },
+            { "text": "Ambulatoria medycznej", "correct": false },
+            { "text": "Pogotowie ratunkowe", "correct": false }
+          ]
+        },
+        {
+          "id": 69,
+          "question": "Co oznacza znak D-15?",
+          "imageUrl": "assets/signs/information/d15.png",
+          "answers": [
+            { "text": "Parking na ulicy", "correct": false },
+            { "text": "Garaż parkingowy", "correct": true },
+            { "text": "Parking bezpłatny", "correct": false },
+            { "text": "Strefa parkingowa", "correct": false }
+          ]
+        },
+        {
+          "id": 70,
+          "question": "Co oznacza znak D-52?",
+          "imageUrl": "assets/signs/information/d52.png",
+          "answers": [
+            { "text": "Koniec autostrady", "correct": false },
+            { "text": "Początek drogi ekspresowej (autostrada/ekspres)", "correct": true },
+            { "text": "Droga główna", "correct": false },
+            { "text": "Zmiana typu drogi", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "road-signs-mixed-expert",
+      "title": "Mieszany quiz - Expert",
+      "description": "Trudny quiz mieszany z pytaniami o wszystkich kategoriach znaków.",
+      "difficulty": "HARD",
+      "questions": [
+        {
+          "id": 71,
+          "question": "Która kategoria znaków ostrzega o zagrożeniach?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Kategoria A", "correct": true },
+            { "text": "Kategoria B", "correct": false },
+            { "text": "Kategoria C", "correct": false },
+            { "text": "Kategoria D", "correct": false }
+          ]
+        },
+        {
+          "id": 72,
+          "question": "Która kategoria znaków zakazuje określonego zachowania?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Kategoria A", "correct": false },
+            { "text": "Kategoria B", "correct": true },
+            { "text": "Kategoria C", "correct": false },
+            { "text": "Kategoria D", "correct": false }
+          ]
+        },
+        {
+          "id": 73,
+          "question": "Która kategoria znaków nakazuje określone działanie?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Kategoria A", "correct": false },
+            { "text": "Kategoria B", "correct": false },
+            { "text": "Kategoria C", "correct": true },
+            { "text": "Kategoria D", "correct": false }
+          ]
+        },
+        {
+          "id": 74,
+          "question": "Co oznacza znak D-23?",
+          "imageUrl": "assets/signs/information/d23.png",
+          "answers": [
+            { "text": "Policja w pobliżu", "correct": false },
+            { "text": "Straż pożarna", "correct": true },
+            { "text": "Pogotowie ratunkowe", "correct": false },
+            { "text": "Stacja techniczna", "correct": false }
+          ]
+        },
+        {
+          "id": 75,
+          "question": "Co oznacza znak D-28?",
+          "imageUrl": "assets/signs/information/d28.png",
+          "answers": [
+            { "text": "Przycisk ostrzegawczy", "correct": false },
+            { "text": "Komisariat policji", "correct": true },
+            { "text": "Straż pożarna", "correct": false },
+            { "text": "Inspekcja drogowa", "correct": false }
+          ]
+        },
+        {
+          "id": 76,
+          "question": "Co oznacza znak D-29?",
+          "imageUrl": "assets/signs/information/d29.png",
+          "answers": [
+            { "text": "Pojazdy osobowe poruszają się wolno", "correct": false },
+            { "text": "Kolumna poruszających się pojazdów", "correct": true },
+            { "text": "Parkingi dla autobusów", "correct": false },
+            { "text": "Droga tymczasowa", "correct": false }
+          ]
+        },
+        {
+          "id": 77,
+          "question": "Co oznacza znak D-34?",
+          "imageUrl": "assets/signs/information/d34.png",
+          "answers": [
+            { "text": "Zakaz postoju tramwajów", "correct": false },
+            { "text": "Przystanki tramwajowe", "correct": true },
+            { "text": "Linia tramwajowa skończona", "correct": false },
+            { "text": "Stacja metra", "correct": false }
+          ]
+        },
+        {
+          "id": 78,
+          "question": "Jaka jest różnica między znakami A-1 i A-2 vs A-2 i A-1?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Brak różnicy", "correct": false },
+            { "text": "A-1 to prawo, A-2 to lewo", "correct": true },
+            { "text": "Jeden ostrzega, drugi nakazuje", "correct": false },
+            { "text": "Różnią się tylko kolorem", "correct": false }
+          ]
+        },
+        {
+          "id": 79,
+          "question": "Który z tych znaków to znak zakazujący?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Trójkąt z czerwoną obwódką", "correct": false },
+            { "text": "Koło z czerwoną obwódką", "correct": true },
+            { "text": "Niebieski prostokąt", "correct": false },
+            { "text": "Wszystkie wymienione", "correct": false }
+          ]
+        },
+        {
+          "id": 80,
+          "question": "Która kategoria znaków ma formę prostokąta niebieskiego?",
+          "imageUrl": null,
+          "answers": [
+            { "text": "Znaki ostrzegawcze", "correct": false },
+            { "text": "Znaki zakazujące i nakazujące", "correct": false },
+            { "text": "Znaki nakazujące i informacyjne", "correct": true },
+            { "text": "Wszystkie kategorie", "correct": false }
           ]
         }
       ]
