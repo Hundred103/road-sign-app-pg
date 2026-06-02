@@ -50,7 +50,7 @@ export class AuthComponent {
       },
       error: (error: HttpErrorResponse) => {
         this.loading = false;
-        this.errorMessage = error.error?.message ?? 'Logowanie nie powiodlo sie';
+        this.errorMessage = this.getPolishErrorMessage(error, 'Logowanie nie powiodło się');
       }
     });
   }
@@ -66,8 +66,69 @@ export class AuthComponent {
       },
       error: (error: HttpErrorResponse) => {
         this.loading = false;
-        this.errorMessage = error.error?.message ?? 'Rejestracja nie powiodla sie';
+        this.errorMessage = this.getPolishErrorMessage(error, 'Rejestracja nie powiodła się');
       }
     });
+  }
+
+  private getPolishErrorMessage(error: HttpErrorResponse, fallbackMessage: string): string {
+    const backendMessage = this.extractBackendMessage(error);
+    if (!backendMessage) {
+      return fallbackMessage;
+    }
+
+    const normalized = backendMessage.toLowerCase().trim();
+
+    if (normalized.includes('email already exists')) {
+      return 'Ten adres e-mail jest już zajęty';
+    }
+
+    if (normalized.includes('username already exists')) {
+      return 'Ta nazwa użytkownika jest już zajęta';
+    }
+
+    if (normalized.includes('username or email already exists')) {
+      return 'Nazwa użytkownika lub e-mail są już zajęte';
+    }
+
+    if (normalized.includes('invalid username or password')) {
+      return 'Nieprawidłowa nazwa użytkownika lub hasło';
+    }
+
+    if (normalized.includes('invalid request body')) {
+      return 'Nieprawidłowe dane formularza';
+    }
+
+    if (normalized.includes('unexpected server error')) {
+      return 'Wystąpił nieoczekiwany błąd serwera';
+    }
+
+    if (normalized.includes('email') && normalized.includes('well-formed')) {
+      return 'Podaj poprawny adres e-mail';
+    }
+
+    if (normalized.includes('password') && normalized.includes('size')) {
+      return 'Hasło musi mieć od 6 do 100 znaków';
+    }
+
+    if (normalized.includes('username') && normalized.includes('size')) {
+      return 'Nazwa użytkownika musi mieć od 3 do 50 znaków';
+    }
+
+    return backendMessage;
+  }
+
+  private extractBackendMessage(error: HttpErrorResponse): string | null {
+    const payload = error.error;
+
+    if (typeof payload === 'string') {
+      return payload;
+    }
+
+    if (payload && typeof payload === 'object') {
+      return payload.message ?? payload.detail ?? null;
+    }
+
+    return null;
   }
 }

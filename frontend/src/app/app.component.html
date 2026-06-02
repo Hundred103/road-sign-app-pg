@@ -11,7 +11,7 @@
         <a routerLink="/quiz" class="nav-link">Quiz</a>
         
         <div class="nav-auth">
-          <a routerLink="/auth" class="nav-link nav-login" *ngIf="!(currentUser$ | async)">Zaloguj</a>
+          <a routerLink="/auth" class="nav-link nav-login" *ngIf="!(currentUser$ | async)">Zaloguj się</a>
           
           <div class="user-menu-wrapper" *ngIf="currentUser$ | async as user" (click)="toggleUserMenu()">
             <button class="user-menu-btn" type="button">
@@ -31,7 +31,7 @@
               <div class="dropdown-divider"></div>
               <button class="dropdown-item logout-btn" (click)="onLogout()" type="button">
                 <span class="logout-icon">🚪</span>
-                Wyloguj
+                Wyloguj się
               </button>
             </div>
           </div>

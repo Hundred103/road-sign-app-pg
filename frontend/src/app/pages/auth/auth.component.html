@@ -19,27 +19,27 @@
       </button>
     </div>
 
-    <h1>{{ mode === 'login' ? 'Witaj ponownie' : 'Zaloz konto' }}</h1>
+    <h1>{{ mode === 'login' ? 'Witaj ponownie' : 'Załóż konto' }}</h1>
 
     <form *ngIf="mode === 'login'" (ngSubmit)="onLogin()">
       <label>
-        Nazwa uzytkownika
+        Nazwa użytkownika
         <input type="text" name="loginUsername" [(ngModel)]="loginData.username" required />
       </label>
 
       <label>
-        Haslo
+        Hasło
         <input type="password" name="loginPassword" [(ngModel)]="loginData.password" required />
       </label>
 
       <button type="submit" [disabled]="loading">
-        {{ loading ? 'Logowanie...' : 'Zaloguj sie' }}
+        {{ loading ? 'Logowanie...' : 'Zaloguj się' }}
       </button>
     </form>
 
     <form *ngIf="mode === 'register'" (ngSubmit)="onRegister()">
       <label>
-        Nazwa uzytkownika
+        Nazwa użytkownika
         <input type="text" name="registerUsername" [(ngModel)]="registerData.username" minlength="3" required />
       </label>
 
@@ -49,21 +49,21 @@
       </label>
 
       <label>
-        Haslo
+        Hasło
         <input type="password" name="registerPassword" [(ngModel)]="registerData.password" minlength="6" required />
       </label>
 
       <label>
-        Wyswietlana nazwa (opcjonalnie)
+        Wyświetlana nazwa (opcjonalnie)
         <input type="text" name="registerDisplayName" [(ngModel)]="registerData.displayName" />
       </label>
 
       <button type="submit" [disabled]="loading">
-        {{ loading ? 'Tworzenie konta...' : 'Zarejestruj sie' }}
+        {{ loading ? 'Tworzenie konta...' : 'Zarejestruj się' }}
       </button>
     </form>
 
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-    <a routerLink="/" class="back-link">Wroc na strone glowna</a>
+    <a routerLink="/" class="back-link">Wróć na stronę główną</a>
   </div>
 </div>

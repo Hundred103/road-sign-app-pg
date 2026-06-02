@@ -120,7 +120,7 @@ export class SignService {
       tap(response => console.log('[DEBUG] saveRanking response:', response)),
       catchError(err => {
         console.error('[DEBUG] saveRanking error:', err);
-        return of({ saved: false, reason: 'Blad sieci' });
+        return of({ saved: false, reason: 'Błąd sieci' });
       })
     );
   }

@@ -187,7 +187,7 @@ export class QuizComponent implements OnInit {
             // try to save ranking (user-service)
             this.signService.saveRanking(this.selectedQuiz!.id, this.score, this.questions.length, this.currentUserId ?? undefined).subscribe((r: any) => {
               this.rankingSaved = !!r?.saved;
-              this.rankingSaveReason = r?.reason ?? 'Blad przy zapisie wyniku';
+              this.rankingSaveReason = r?.reason ?? 'Błąd przy zapisie wyniku';
               // refresh ranking to show latest result
               this.signService.getRankingForQuiz(this.selectedQuiz!.id, 10).subscribe((res) => {
                 this.rankingList = res.top ?? [];
@@ -234,10 +234,10 @@ export class QuizComponent implements OnInit {
   getScoreMessage(): string {
     const percentage = (this.score / this.questions.length) * 100;
 
-    if (percentage === 100) return 'Perfekcyjnie! Jestes ekspertem od znakow drogowych!';
-    if (percentage >= 80) return 'Swietny wynik! Znasz znaki bardzo dobrze!';
-    if (percentage >= 60) return 'Dobra robota! Jeszcze troche nauki i bedziesz mistrzem!';
-    if (percentage >= 40) return 'Nie poddawaj sie! Wroc do kursu i sprobuj ponownie!';
-    return 'Czas na nauke! Przejrzyj kurs i wroc do quizu!';
+    if (percentage === 100) return 'Perfekcyjnie! Jesteś ekspertem od znaków drogowych!';
+    if (percentage >= 80) return 'Świetny wynik! Znasz znaki bardzo dobrze!';
+    if (percentage >= 60) return 'Dobra robota! Jeszcze trochę nauki i będziesz mistrzem!';
+    if (percentage >= 40) return 'Nie poddawaj się! Wróć do kursu i spróbuj ponownie!';
+    return 'Czas na naukę! Przejrzyj kurs i wróć do quizu!';
   }
 }
