@@ -131,9 +131,27 @@ services:
     networks:
       - road-sign-network
 
+  # Public HTTP/HTTPS reverse proxy (Let's Encrypt via Caddy)
+  proxy:
+    image: caddy:2-alpine
+    container_name: road-sign-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+    networks:
+      - road-sign-network
+
 volumes:
   postgres_data:
   postgres_user_data:
+  caddy_data:
+  caddy_config:
 
 networks:
   road-sign-network:

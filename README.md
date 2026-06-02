@@ -52,6 +52,37 @@ The application will be available at:
 - Sign Service: http://localhost:8081
 - User Service: http://localhost:8082
 
+### Demo HTTPS Proxy (Let's Encrypt)
+
+This repository includes a very simple Dockerized reverse proxy using Caddy with automatic Let's Encrypt certificates.
+
+- Keeps local frontend access on `http://localhost:4200`
+- Exposes public HTTP/HTTPS on ports `80` and `443`
+- Forwards traffic to the `frontend` service
+
+Run helper (domain/email are optional because defaults are pre-filled):
+
+```bash
+./scripts/setup-proxy.sh roadsigns.ftp.sh mati1mich@gmail.com false
+```
+
+Arguments:
+
+1. domain (default: `roadsigns.ftp.sh`)
+2. email (default: `mati1mich@gmail.com`)
+3. staging ACME (`true|false`, default: `false`)
+
+Use staging certificates while testing DNS to avoid rate limits:
+
+```bash
+./scripts/setup-proxy.sh roadsigns.ftp.sh mati1mich@gmail.com true
+```
+
+Requirements:
+
+- DNS A/AAAA record for your domain must point to this host public IP.
+- Ports 80 and 443 must be open and routed to this machine.
+
 ### Manual Setup
 
 #### Backend Services
