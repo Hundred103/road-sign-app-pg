@@ -179,7 +179,24 @@ export class SignService {
   getProxyForAssetPath(path: string): string {
     if (!path) return '';
     if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    // If the path looks percent-encoded and contains an already-proxied path, decode and return it
+    try {
+      const decoded = decodeURIComponent(path);
+      if (decoded.startsWith('/api/signs/assets-proxy') || decoded.startsWith('api/signs/assets-proxy') || decoded.startsWith('/api/')) {
+        return decoded.startsWith('/') ? decoded : '/' + decoded;
+      }
+    } catch (e) {
+      // ignore decode errors and continue
+    }
+
+    // If already a proxied API path, return as-is to avoid double-wrapping
+    if (path.startsWith('/api/signs/assets-proxy') || path.startsWith('api/signs/assets-proxy') || path.startsWith('/api/')) {
+      return path;
+    }
+
     const cleaned = path.startsWith('/') ? path.substring(1) : path;
-    return `${environment.apiUrl}/signs/assets-proxy/${encodeURIComponent(cleaned)}`;
+    // Encode each segment but keep slashes so gateway paths remain readable
+    const encoded = cleaned.split('/').map(encodeURIComponent).join('/');
+    return `${environment.apiUrl}/signs/assets-proxy/${encoded}`;
   }
 }
