@@ -957,9 +957,9 @@
           "question": "Który znak oznacza zakaz wjazdu?",
           "imageUrl": null,
           "answers": [
-            { "text": "B-1", "imageUrl": "assets/signs/prohibittion/b1.png", "correct": false },
-            { "text": "B-2", "imageUrl": "assets/signs/prohibittion/b2.png", "correct": true },
-            { "text": "B-20", "imageUrl": "assets/signs/prohibittion/b20.png", "correct": false },
+            { "text": "B-1", "imageUrl": "assets/signs/prohibition/b1.png", "correct": false },
+            { "text": "B-2", "imageUrl": "assets/signs/prohibition/b2.png", "correct": true },
+            { "text": "B-20", "imageUrl": "assets/signs/prohibition/b20.png", "correct": false },
             { "text": "C-1", "imageUrl": "assets/signs/mandatory/c1.png", "correct": false }
           ]
         },
@@ -1004,7 +1004,7 @@
             { "text": "A-18a", "imageUrl": "assets/signs/warning/a18a.png", "correct": false },
             { "text": "A-17", "imageUrl": "assets/signs/warning/a17.png", "correct": true },
             { "text": "A-23", "imageUrl": "assets/signs/warning/a23.png", "correct": false },
-            { "text": "B-33", "imageUrl": "assets/signs/prohibittion/b33.png", "correct": false }
+            { "text": "B-33", "imageUrl": "assets/signs/prohibition/b33.png", "correct": false }
           ]
         }
       ]

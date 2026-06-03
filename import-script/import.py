@@ -28,7 +28,7 @@ import requests
 
 CATEGORY_FOLDER = {
     'WARNING': 'warning',
-    'PROHIBITION': 'prohibittion',
+    'PROHIBITION': 'prohibition',
     'MANDATORY': 'mandatory',
     'INFORMATION': 'information',
     'PRIORITY': 'information'
