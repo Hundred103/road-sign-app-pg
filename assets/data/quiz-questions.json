@@ -949,7 +949,7 @@
       "code": "road-signs-answer-images-demo",
       "title": "Demo: odpowiedzi z obrazkami",
       "description": "Krótki quiz pokazujący odpowiedzi, które mogą mieć własne obrazki.",
-      "difficulty": "EASY",
+      "difficulty": "DEMO",
       "defaultQuiz": false,
       "questions": [
         {
