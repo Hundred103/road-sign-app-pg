@@ -137,8 +137,8 @@ services:
     container_name: road-sign-reverse-proxy
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "10986:80"
+      - "10987:443"
     environment:
       - PUBLIC_DOMAIN=${PUBLIC_DOMAIN:-roadsigns.ftp.sh}
       - ACME_EMAIL=${ACME_EMAIL:-mati1mich@gmail.com}
