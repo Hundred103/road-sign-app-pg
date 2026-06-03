@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping({"/quiz", "/quiz-questions"})
@@ -158,16 +160,35 @@ public class QuizController {
         Map<String, Object> dto = new HashMap<>();
         dto.put("id", q.getId());
         dto.put("question", q.getQuestionText());
-        dto.put("imageUrl", q.getImageUrl());
+        dto.put("imageUrl", rewriteAssetUrl(q.getImageUrl()));
         List<Map<String, Object>> answers = q.getAnswers().stream().map(a -> {
             Map<String, Object> am = new HashMap<>();
             am.put("text", a.getAnswerText());
-            am.put("imageUrl", a.getImageUrl());
+            am.put("imageUrl", rewriteAssetUrl(a.getImageUrl()));
             am.put("correct", a.getIsCorrect() != null ? a.getIsCorrect() : false);
             return am;
         }).collect(Collectors.toList());
         dto.put("answers", answers);
         return dto;
+    }
+
+    private String rewriteAssetUrl(String url) {
+        if (url == null || url.isBlank()) return null;
+        String v = url.trim();
+        if (v.startsWith("http://") || v.startsWith("https://")) return v;
+
+        // strip leading slash
+        if (v.startsWith("/")) v = v.substring(1);
+
+        // Encode the path and return a gateway-accessible proxy path
+        try {
+            String encoded = URLEncoder.encode(v, StandardCharsets.UTF_8.toString());
+            // Keep slashes unencoded so gateway and servlet don't see %2F
+            encoded = encoded.replace("%2F", "/");
+            return "/api/signs/assets-proxy/" + encoded;
+        } catch (Exception e) {
+            return "/api/signs/assets-proxy/" + v.replaceAll("\\s+", "%20");
+        }
     }
 
     @SuppressWarnings("unchecked")

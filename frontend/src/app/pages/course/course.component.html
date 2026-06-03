@@ -25,7 +25,7 @@
         </span>
       </div>
       <div class="sign-image">
-        <img [src]="sign.imageUrl || '/assets/signs/placeholder.png'" [alt]="sign.name">
+        <img [src]="sign.imageUrl ? signService.getSignImageUrl(sign) : '/assets/signs/placeholder.png'" [alt]="sign.name">
       </div>
       <h3>{{ sign.code }}</h3>
       <p>{{ sign.name }}</p>
@@ -36,7 +36,7 @@
     <div class="sign-detail-card" (click)="$event.stopPropagation()">
       <button class="close-btn" (click)="closeDetail()">&times;</button>
       <div class="detail-image">
-        <img [src]="selectedSign.imageUrl || '/assets/signs/placeholder.png'" [alt]="selectedSign.name">
+        <img [src]="selectedSign.imageUrl ? signService.getSignImageUrl(selectedSign) : '/assets/signs/placeholder.png'" [alt]="selectedSign.name">
       </div>
       <h2>{{ selectedSign.code }} - {{ selectedSign.name }}</h2>
       <p class="description">{{ selectedSign.description }}</p>

@@ -163,4 +163,23 @@ export class SignService {
   markTileViewed(signId: number, userId: number): Observable<TileViewStatus> {
     return this.http.post<TileViewStatus>(`${this.apiUrl}/${signId}/views?userId=${userId}`, {});
   }
+
+  /**
+   * Returns a URL that the client can use to fetch the sign image via the backend.
+   * Prefer using this in templates to ensure images are served from a reachable origin.
+   */
+  getSignImageUrl(sign: { id: number; imageUrl?: string | null }): string {
+    return `${environment.apiUrl}/signs/${sign.id}/image`;
+  }
+
+  /**
+   * Returns a proxy URL for arbitrary asset paths (like assets/signs/...).
+   * Example: getProxyForAssetPath('assets/signs/prohibition/b1.png')
+   */
+  getProxyForAssetPath(path: string): string {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    const cleaned = path.startsWith('/') ? path.substring(1) : path;
+    return `${environment.apiUrl}/signs/assets-proxy/${encodeURIComponent(cleaned)}`;
+  }
 }

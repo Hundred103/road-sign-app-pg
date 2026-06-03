@@ -11,7 +11,7 @@ import { AuthService, AuthUser } from '../../services/auth.service';
   styleUrl: './course.component.scss'
 })
 export class CourseComponent implements OnInit {
-  private signService = inject(SignService);
+  public signService = inject(SignService);
   private authService = inject(AuthService);
 
   signs: RoadSign[] = [];

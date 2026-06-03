@@ -98,8 +98,8 @@
       <div class="question-number">Pytanie {{ currentQuestionIndex + 1 }}</div>
       <h2 class="question-text">{{ currentQuestion.question }}</h2>
       
-      <div *ngIf="currentQuestion.imageUrl" class="question-image">
-        <img [src]="currentQuestion.imageUrl" alt="Znak drogowy">
+      <div *ngIf="getAnyImageUrl(currentQuestion.imageUrl) as qImg" class="question-image">
+        <img [src]="qImg" alt="Znak drogowy">
       </div>
       
       <div class="answers">
@@ -114,8 +114,8 @@
           (click)="selectAnswer(i)">
           <span class="answer-letter">{{ getLetterForIndex(i) }}</span>
           <div class="answer-content">
-            <div *ngIf="answer.imageUrl" class="answer-image">
-              <img [src]="answer.imageUrl" [alt]="answer.text">
+            <div *ngIf="getAnyImageUrl(answer.imageUrl) as aImg" class="answer-image">
+              <img [src]="aImg" [alt]="answer.text">
             </div>
             <span class="answer-text">{{ answer.text }}</span>
           </div>

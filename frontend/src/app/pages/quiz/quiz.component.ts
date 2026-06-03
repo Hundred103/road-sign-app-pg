@@ -172,7 +172,16 @@ export class QuizComponent implements OnInit {
   }
 
   getQuizImageUrl(quiz: QuizDefinition): string | null {
-    return quiz.imageUrl && quiz.imageUrl !== 'null' ? quiz.imageUrl : null;
+    if (quiz.imageUrl && quiz.imageUrl !== 'null') {
+      return this.signService.getProxyForAssetPath(quiz.imageUrl as string);
+    }
+    return null;
+  }
+
+  getAnyImageUrl(path?: string | null): string | null {
+    if (!path) return null;
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    return this.signService.getProxyForAssetPath(path);
   }
 
   selectQuiz(quiz: QuizDefinition) {
